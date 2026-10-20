@@ -1,0 +1,70 @@
+{
+  "total_cleaned_records": 255668,
+  "negative_count": 242136,
+  "positive_count": 13532,
+  "positive_rate_pct": 5.29,
+  "models": {
+    "Logistic Regression": {
+      "auc": 0.8335,
+      "pr_auc": 0.4792
+    },
+    "Decision Tree": {
+      "auc": 0.8302,
+      "pr_auc": 0.4858
+    },
+    "Random Forest": {
+      "auc": 0.8439,
+      "pr_auc": 0.527
+    },
+    "LightGBM with Age": {
+      "auc": 0.8412,
+      "pr_auc": 0.54
+    },
+    "LightGBM without Age": {
+      "auc": 0.8448,
+      "pr_auc": 0.5391
+    }
+  },
+  "thresholds": [
+    {
+      "Threshold": 0.1,
+      "Sensitivity (Recall)": "94.3%",
+      "Specificity": "23.3%",
+      "Precision (PPV)": "7.3%",
+      "Missed Infections (FN)": 128,
+      "False Alarms (FP)": 26892
+    },
+    {
+      "Threshold": 0.2,
+      "Sensitivity (Recall)": "81.2%",
+      "Specificity": "68.0%",
+      "Precision (PPV)": "14.1%",
+      "Missed Infections (FN)": 426,
+      "False Alarms (FP)": 11215
+    },
+    {
+      "Threshold": 0.3,
+      "Sensitivity (Recall)": "79.4%",
+      "Specificity": "71.9%",
+      "Precision (PPV)": "15.4%",
+      "Missed Infections (FN)": 465,
+      "False Alarms (FP)": 9860
+    },
+    {
+      "Threshold": 0.4,
+      "Sensitivity (Recall)": "78.7%",
+      "Specificity": "73.5%",
+      "Precision (PPV)": "16.1%",
+      "Missed Infections (FN)": 482,
+      "False Alarms (FP)": 9304
+    },
+    {
+      "Threshold": 0.5,
+      "Sensitivity (Recall)": "74.9%",
+      "Specificity": "81.8%",
+      "Precision (PPV)": "21.0%",
+      "Missed Infections (FN)": 567,
+      "False Alarms (FP)": 6368
+    }
+  ]
+}
