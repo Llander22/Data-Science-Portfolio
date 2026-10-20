@@ -18,24 +18,24 @@
   * **Key Decisions & Evidence:** Define binary diagnostic risk (y in {0, 1}) under acute March 2020 RT-PCR scarcity. Mandate non-invasive 30-second self-reporting. Enforce the chronological "Arrow of Time".
 
 * **🔷 Stage 2: Data Ingestion & Quality Auditing**
-  * **Workbook Mapping:** `Phase 2: Ingestion & Epidemiological EDA`
+  * **Workbook Mapping:** `Phase 2: Ingestion & Epidemiological Realities`
   * **Key Decisions & Evidence:** Audit 278,848 tests (51 days). Unmask 94.7% vs 5.3% class imbalance. Expose the "Accuracy Fallacy". Uncover the April 15 regulatory privacy redaction cliff.
 
 * **🔷 Stage 3: Preprocessing & Pipeline Architecture**
   * **Workbook Mapping:** `Phase 2.3–2.4 & Phase 3: Pipeline Architecture`
   * **Key Decisions & Evidence:** Filter 3,892 inconclusive targets and 19k missing gender records (clean cohort n = 255,668). Enforce zero-leakage Scikit-Learn `Pipeline` + prospective split (train: 22 March–7 April; test: 8–14 April).
 
-* **🔷 Stage 4: Modeling & Boosting Benchmarks**
+* **🔷 Stage 4: Modelling & Boosting Benchmarks**
   * **Workbook Mapping:** `Phase 3: Benchmark Replication & Phase 4: XGBoost`
   * **Key Decisions & Evidence:** Replicate *Zoabi et al.*: Decision Tree (0.8357), Random Forest (0.8412), LightGBM (0.8443, PR-AUC 0.5448), and XGBoost (0.8448, PR-AUC 0.5480). Validate via 5-fold CV within training window.
 
 * **🔷 Stage 5: Clinical Explainability & Demographic Fairness**
-  * **Workbook Mapping:** `Phase 4: Advanced Modeling & Interpretability`
+  * **Workbook Mapping:** `Phase 4: Advanced Modelling & Interpretability`
   * **Key Decisions & Evidence:** Generate TreeSHAP beeswarm and bar attribution. Unsupervised 2D t-SNE symptom phenotyping. Subgroup fairness audit across gender (AUC 0.824 vs 0.854) and age.
 
 * **🔷 Stage 6: Operational Thresholding & Clinical Impact**
-  * **Workbook Mapping:** `Phase 5: Decision Thresholding & Phase 6: Synthesis`
-  * **Key Decisions & Evidence:** Reject arbitrary 0.50 threshold (misses 567 patients). Calibrate clinical cutoff to tau = 0.20 (81.2% sensitivity, rescuing 137 infected patients). Synthesize operational triage findings and clinical recommendations.
+  * **Workbook Mapping:** `Phase 5: Operational Decision Thresholding & Closing Summary`
+  * **Key Decisions & Evidence:** Reject arbitrary 0.50 threshold (misses 567 patients). Calibrate clinical cutoff to tau = 0.20 (81.2% sensitivity, rescuing 137 infected patients). Synthesise operational triage findings and clinical recommendations.
 
 ---
 
@@ -57,8 +57,8 @@ The sections below decompose the **CRISP-DM Master Decision Architecture** into 
       <h3 style="margin: 0 0 8px 0; color: #1a73e8;">🔷 STAGE 1: Clinical Problem Formulation & Triage Mandate</h3>
       <p style="margin: 4px 0 12px 0; font-size: 13px; color: #5f6368;">📖 <b>Workbook Mapping:</b> Phase 1: Clinical Problem Formulation & Operational Framing</p>
       <ul style="padding-left: 20px; margin: 8px 0; line-height: 1.55;">
-        <li style="margin-bottom: 8px;">🟢 <b>Selected Option:</b> <b>Calibrated Binary Probability Classifier</b> — Estimating continuous infection risk <i>P(y=1|X) &isin; [0, 1]</i> from 8 self-reported indicators accessible in under 30 seconds to prioritize RT-PCR laboratory swabs.</li>
-        <li style="margin-bottom: 8px;">🔴 <b>Rejected Option:</b> <b>Multiclass Categorization</b> — Unnecessary clinical overhead when the immediate operational decision during testing scarcity is strictly binary (administer PCR swab vs. isolate safely at home).</li>
+        <li style="margin-bottom: 8px;">🟢 <b>Selected Option:</b> <b>Calibrated Binary Probability Classifier</b> — Estimating continuous infection risk <i>P(y=1|X) &isin; [0, 1]</i> from 8 self-reported indicators accessible in under 30 seconds to prioritise RT-PCR laboratory swabs.</li>
+        <li style="margin-bottom: 8px;">🔴 <b>Rejected Option:</b> <b>Multiclass Categorisation</b> — Unnecessary clinical overhead when the immediate operational decision during testing scarcity is strictly binary (administer PCR swab vs. isolate safely at home).</li>
         <li style="margin-bottom: 8px;">⚪ <b>Alternative Option:</b> <b>Survival / Longitudinal Analysis</b> — Unfeasible due to absence of symptom onset dates in nationwide testing registry.</li>
         <li style="margin-bottom: 0;">🛡️ <b>Defensibility Rationale:</b> Generating continuous probabilities allows hospital systems to dynamically tune the decision cutoff &tau; based on daily swab supply and hospital bed capacity.</li>
       </ul>
@@ -130,7 +130,7 @@ The sections below decompose the **CRISP-DM Master Decision Architecture** into 
     </td>
     <td width="58%" valign="top">
       <h3 style="margin: 0 0 8px 0; color: #1a73e8;">🔷 STAGE 5: Clinical Explainability & Demographic Fairness</h3>
-      <p style="margin: 4px 0 12px 0; font-size: 13px; color: #5f6368;">📖 <b>Workbook Mapping:</b> Phase 4: Advanced Modeling & Interpretability (TreeSHAP, 2D t-SNE Phenotyping & Subgroup Parity Audit)</p>
+      <p style="margin: 4px 0 12px 0; font-size: 13px; color: #5f6368;">📖 <b>Workbook Mapping:</b> Phase 4: Advanced Modelling & Interpretability (TreeSHAP, 2D t-SNE Phenotyping & Subgroup Parity Audit)</p>
       <ul style="padding-left: 20px; margin: 8px 0; line-height: 1.55;">
         <li style="margin-bottom: 8px;">🟢 <b>Selected Option:</b> <b>TreeSHAP Explainability & Subgroup Demographic Fairness Audit</b> — Exact game-theoretic Shapley values reveal patient risk log-odds (<code>Contact with confirmed</code> and <code>Fever</code> dominate). Demographic slicing audits gender (Male AUC 0.8243 vs. Female AUC 0.8540) and age (&lt;60 AUC 0.8457 vs. 60+ AUC 0.8328). Includes 2D t-SNE unsupervised phenotyping.</li>
         <li style="margin-bottom: 8px;">🔴 <b>Rejected Option:</b> <b>Aggregate-Only Metric Reporting</b> — Violates healthcare ethics by obscuring disparate clinical impact across vulnerable protected groups.</li>
@@ -149,7 +149,7 @@ The sections below decompose the **CRISP-DM Master Decision Architecture** into 
     </td>
     <td width="58%" valign="top">
       <h3 style="margin: 0 0 8px 0; color: #1a73e8;">🔷 STAGE 6: Operational Decision Thresholding & Clinical Impact</h3>
-      <p style="margin: 4px 0 12px 0; font-size: 13px; color: #5f6368;">📖 <b>Workbook Mapping:</b> Phase 5 (Operational Decision Thresholding) & Phase 6 (Executive Synthesis & Clinical Translation)</p>
+      <p style="margin: 4px 0 12px 0; font-size: 13px; color: #5f6368;">📖 <b>Workbook Mapping:</b> Phase 5: Operational Decision Thresholding & Closing Summary (Clinical Triage Insights)</p>
       <ul style="padding-left: 20px; margin: 8px 0; line-height: 1.55;">
         <li style="margin-bottom: 8px;">🟢 <b>Selected Option:</b> <b>Calibrated Clinical Cutoff (&tau; = 0.20)</b> — Elevates sensitivity to <b>81.2%</b> (capturing 1,836 of 2,261 infected patients), rescuing 137 individuals who would have been sent home under &tau; = 0.50.</li>
         <li style="margin-bottom: 8px;">🔴 <b>Rejected Option:</b> <b>Default &tau; = 0.50 Cutoff</b> — Implicitly assumes equal error costs; disastrous in epidemics where false negatives drive silent community transmission.</li>

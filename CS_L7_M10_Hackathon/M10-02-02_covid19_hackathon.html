@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>M10-02-02_covid19_hackathon</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>Notebook</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7508,7 +7508,102 @@ a.anchor-link {
     white-space: normal;
   }
 </style>
-<!-- End of mermaid configuration --></head>
+<!-- End of mermaid configuration -->
+    <style>
+    @media print {
+        @page {
+            size: A4 portrait;
+            margin: 10mm 12mm 10mm 12mm;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+            color: #0f172a !important;
+            background: #ffffff !important;
+            font-size: 10pt !important;
+            line-height: 1.45 !important;
+        }
+        .jp-Notebook {
+            padding: 0 !important;
+            background: #ffffff !important;
+        }
+        h1 {
+            font-size: 19pt !important;
+            break-after: avoid !important;
+            page-break-after: avoid !important;
+            color: #0f172a !important;
+            margin-top: 0.8em !important;
+            margin-bottom: 0.3em !important;
+        }
+        h2 {
+            font-size: 14pt !important;
+            break-after: avoid !important;
+            page-break-after: avoid !important;
+            color: #1e293b !important;
+            margin-top: 1em !important;
+            margin-bottom: 0.4em !important;
+            border-bottom: 1px solid #e2e8f0 !important;
+            padding-bottom: 4px !important;
+        }
+        h3 {
+            font-size: 12pt !important;
+            break-after: avoid !important;
+            page-break-after: avoid !important;
+            color: #334155 !important;
+            margin-top: 0.8em !important;
+            margin-bottom: 0.3em !important;
+        }
+        h4, h5 {
+            break-after: avoid !important;
+            page-break-after: avoid !important;
+        }
+        /* Code Cells */
+        .jp-CodeCell .jp-Cell-inputWrapper, .input, .highlight {
+            break-inside: avoid !important;
+            page-break-inside: avoid !important;
+            border-radius: 4px !important;
+            font-size: 8.8pt !important;
+            background-color: #f8fafc !important;
+            border: 1px solid #e2e8f0 !important;
+        }
+        .jp-OutputArea-child, .output {
+            break-inside: avoid !important;
+            page-break-inside: avoid !important;
+        }
+        /* Visualizations */
+        .jp-RenderedImage img, img {
+            max-width: 90% !important;
+            height: auto !important;
+            display: block !important;
+            margin: 6px auto !important;
+            break-inside: avoid !important;
+            page-break-inside: avoid !important;
+        }
+        /* Scorecard Tables */
+        table.dataframe {
+            width: 100% !important;
+            border-collapse: collapse !important;
+            break-inside: avoid !important;
+            page-break-inside: avoid !important;
+            font-size: 8.5pt !important;
+            margin: 8px 0 !important;
+        }
+        table.dataframe th, table.dataframe td {
+            padding: 5px 8px !important;
+            border: 1px solid #cbd5e1 !important;
+        }
+        table.dataframe th {
+            background-color: #f1f5f9 !important;
+            color: #0f172a !important;
+            font-weight: 600 !important;
+        }
+        .jp-Cell {
+            border: none !important;
+            margin-bottom: 0.5em !important;
+        }
+    }
+    </style>
+    
+</head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 <main>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ea2f8c2c">
@@ -7526,11 +7621,11 @@ a.anchor-link {
 <li><p><strong>Phase 1: Clinical Problem Formulation</strong> <code>[Status: Completed]</code><br/>
 Define non-invasive screening under test scarcity; establish chronological prospective evaluation rules.</p>
 </li>
-<li><p><strong>Phase 2: Ingestion &amp; Epidemiological EDA</strong> <code>[Status: Completed]</code><br/>
-Audit 278,848 tests; quantify 5.3% class imbalance, reporting bias, and discover April 15 privacy redaction.</p>
+<li><p><strong>Phase 2: Ingestion &amp; Epidemiological Realities</strong> <code>[Status: Completed]</code><br/>
+Audit 278,848 tests; quantify 5.3% class imbalance, symptom reporting bias, and discover the April 15 privacy redaction.</p>
 </li>
 <li><p><strong>Phase 3: Benchmark Replication (Zoabi et al.)</strong> <code>[Status: Completed]</code><br/>
-Replicate Decision Tree baseline (AUC 0.8357) and LightGBM model (AUC 0.8443, PR-AUC 0.5438) on prospective hold-out (April 8–14).</p>
+Replicate Decision Tree baseline (AUC 0.8357) and LightGBM model (AUC 0.8443, PR-AUC 0.5448) on prospective hold-out data (April 8–14).</p>
 </li>
 <li><p><strong>Phase 4: Advanced Modeling &amp; Interpretability</strong> <code>[Status: Completed]</code><br/>
 • Benchmark <strong>XGBoost</strong> alongside LightGBM.<br/>
@@ -7539,9 +7634,9 @@ Replicate Decision Tree baseline (AUC 0.8357) and LightGBM model (AUC 0.8443, PR
 • Subgroup <strong>Fairness &amp; Demographic Parity Audit</strong> across gender and age.</p>
 </li>
 <li><p><strong>Phase 5: Operational Decision Thresholding</strong> <code>[Status: Completed]</code><br/>
-Translate ROC/PR curves into hospital triage rules; calibrate cost-sensitive cutoffs (0.50 vs 0.20 vs 0.10) to minimize missed infections.</p>
+Translate ROC/PR curves into hospital triage rules; calibrate cost-sensitive cutoffs (0.50 vs 0.20 vs 0.10) to catch infected patients.</p>
 </li>
-<li><p><strong>Phase 6: Executive Synthesis &amp; Clinical Translation</strong> <code>[Status: Completed]</code></p>
+<li><p><strong>Closing Summary: What the Findings Mean for Clinical Triage</strong> <code>[Status: Completed]</code></p>
 </li>
 </ul>
 <hr/>
@@ -7555,13 +7650,13 @@ Translate ROC/PR curves into hospital triage rules; calibrate cost-sensitive cut
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Phase-1:-Clinical-Problem-Formulation-&amp;-Operational-Framing">Phase 1: Clinical Problem Formulation &amp; Operational Framing<a class="anchor-link" href="#Phase-1:-Clinical-Problem-Formulation-&amp;-Operational-Framing">¶</a></h2><p>At the onset of the SARS-CoV-2 pandemic, healthcare infrastructure faced acute testing scarcity and clinical bottlenecks. Medical systems urgently required an automated, non-invasive triage mechanism capable of estimating infection risk from basic self-reported indicators before laboratory RT-PCR confirmation.</p>
-<p>This study establishes an end-to-end, scientifically validated machine learning pipeline to address this challenge. Rather than treating this as an abstract cross-sectional classification task, the analysis addresses four critical epidemiological realities:</p>
+<h2 id="Phase-1:-Clinical-Problem-Formulation-&amp;-Operational-Framing">Phase 1: Clinical Problem Formulation &amp; Operational Framing<a class="anchor-link" href="#Phase-1:-Clinical-Problem-Formulation-&amp;-Operational-Framing">¶</a></h2><p>At the start of the COVID-19 pandemic, healthcare systems faced acute shortages of RT-PCR testing kits. Hospitals and clinics urgently needed an automated, non-invasive way to triage individuals based on simple self-reported symptoms before lab swab confirmation.</p>
+<p>This study builds an end-to-end, scientifically validated machine learning pipeline to address this challenge. Rather than treating this as a simple textbook classification problem, we ground our work in four real-world epidemiological realities:</p>
 <ol>
-<li><strong>Severe Class Imbalance (~5.3% Positivity):</strong> Out of 278,848 nationwide tests, over 94% are negative. Demonstrating why Accuracy fails and auditing models strictly on ROC-AUC, PR-AUC, and cost-sensitive sensitivity.</li>
-<li><strong>Pervasive Symptom Reporting Bias:</strong> Deconstructing why symptoms were recorded aggressively for positive hospital cases but left blank for routine screening travelers.</li>
-<li><strong>The Non-Negotiable Arrow of Time (Prospective Evaluation):</strong> Evaluating why random 80/20 train/test shuffling causes fatal look-ahead leakage in epidemic modeling, validating chronological prospective partitioning.</li>
-<li><strong>The April 15 Privacy Redaction:</strong> Auditing why age was redacted by authorities mid-epidemic, comparing a Clinical Full Model against an Accessible Symptom-Only Model.</li>
+<li><strong>Severe Class Imbalance (~5.3% Positivity):</strong> Out of 278,848 nationwide tests, over 94% are negative. We demonstrate why standard accuracy is completely misleading, evaluating models instead on ROC-AUC, PR-AUC, and clinical sensitivity.</li>
+<li><strong>Symptom Reporting Bias:</strong> We examine why symptoms were recorded thoroughly for hospitalised positive cases but often left blank during routine screening.</li>
+<li><strong>Respecting the Chronological Order of Time:</strong> We explain why standard random 80/20 train/test shuffling causes fatal look-ahead leakage in epidemic modeling, and enforce strict prospective testing on future dates.</li>
+<li><strong>The April 15 Privacy Redaction:</strong> We investigate why health authorities abruptly removed patient age mid-epidemic, and build a Symptom-Only model to guarantee triage resilience.</li>
 </ol>
 </div>
 </div>
@@ -7573,8 +7668,8 @@ Translate ROC/PR curves into hospital triage rules; calibrate cost-sensitive cut
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="1.1-Technical-Environment-&amp;-Library-Initialization">1.1 Technical Environment &amp; Library Initialization<a class="anchor-link" href="#1.1-Technical-Environment-&amp;-Library-Initialization">¶</a></h3><p>Before conducting data ingestion and modeling, we initialize the high-performance data science and machine learning runtime. We load tabular manipulation engines (<code>pandas</code>, <code>numpy</code>), visualization frameworks (<code>matplotlib</code>, <code>seaborn</code>), Scikit-Learn zero-leakage pipeline modules, and modern gradient boosting libraries (<code>lightgbm</code>, <code>xgboost</code>).</p>
-<p>We configure an explicit random seed (<code>seed = 5</code>) across all stochastic libraries to guarantee end-to-end scientific reproducibility across cross-validation splits and tree boosting estimators.</p>
+<h3 id="1.1-Technical-Environment-&amp;-Library-Setup">1.1 Technical Environment &amp; Library Setup<a class="anchor-link" href="#1.1-Technical-Environment-&amp;-Library-Setup">¶</a></h3><p>Before working with the data, we configure our Python environment. We import our core data science tools (<code>pandas</code>, <code>numpy</code>, <code>matplotlib</code>, <code>seaborn</code>), Scikit-Learn pipeline transformers, and tree-boosting engines (<code>lightgbm</code>, <code>xgboost</code>).</p>
+<p>To ensure all splits, cross-validation folds, and models produce identical, verifiable results for our study group, we set a global random seed (<code>seed = 5</code>).</p>
 </div>
 </div>
 </div>
@@ -7649,7 +7744,7 @@ Translate ROC/PR curves into hospital triage rules; calibrate cost-sensitive cut
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Phase-2:-Ingestion-&amp;-Epidemiological-EDA">Phase 2: Ingestion &amp; Epidemiological EDA<a class="anchor-link" href="#Phase-2:-Ingestion-&amp;-Epidemiological-EDA">¶</a></h2><h3 id="2.1-Nationwide-Data-Ingestion-&amp;-Quality-Auditing">2.1 Nationwide Data Ingestion &amp; Quality Auditing<a class="anchor-link" href="#2.1-Nationwide-Data-Ingestion-&amp;-Quality-Auditing">¶</a></h3><p>Ingest 278,848 records across 51 consecutive days from the Israeli Ministry of Health to verify schema integrity, missingness patterns, and prospective timestamp continuity.</p>
+<h2 id="Phase-2:-Ingestion-&amp;-Epidemiological-Realities">Phase 2: Ingestion &amp; Epidemiological Realities<a class="anchor-link" href="#Phase-2:-Ingestion-&amp;-Epidemiological-Realities">¶</a></h2><h3 id="2.1-Nationwide-Data-Ingestion-&amp;-Quality-Auditing">2.1 Nationwide Data Ingestion &amp; Quality Auditing<a class="anchor-link" href="#2.1-Nationwide-Data-Ingestion-&amp;-Quality-Auditing">¶</a></h3><p>We load and audit 278,848 records across 51 consecutive days from the Israeli Ministry of Health to verify data structure, missing values, and testing continuity over time.</p>
 </div>
 </div>
 </div>
@@ -7660,8 +7755,8 @@ Translate ROC/PR curves into hospital triage rules; calibrate cost-sensitive cut
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="2.1-Nationwide-Testing-Registry-Ingestion">2.1 Nationwide Testing Registry Ingestion<a class="anchor-link" href="#2.1-Nationwide-Testing-Registry-Ingestion">¶</a></h3><p>We ingest the raw Israeli Ministry of Health epidemiological testing dataset (<code>corona_tested_individuals_ver_006.english.csv</code>). This registry documents 278,848 RT-PCR laboratory swab tests administered nationwide between 11 March 2020 and 30 April 2020 (51 consecutive days).</p>
-<p>Each record contains self-reported clinical symptoms (cough, fever, sore throat, shortness of breath, headache), basic demographic flags (gender, age 60+), and epidemiological contact indication.</p>
+<h3 id="2.1-Nationwide-Testing-Registry-Ingestion">2.1 Nationwide Testing Registry Ingestion<a class="anchor-link" href="#2.1-Nationwide-Testing-Registry-Ingestion">¶</a></h3><p>We ingest the raw Israeli Ministry of Health testing dataset (<code>corona_tested_individuals_ver_006.english.csv</code>). This registry documents 278,848 RT-PCR laboratory swab tests carried out nationwide between 11 March and 30 April 2020 (51 consecutive days).</p>
+<p>Each record tracks basic self-reported symptoms (cough, fever, sore throat, shortness of breath, headache), demographic details (gender, age 60+), and known epidemiological contact.</p>
 </div>
 </div>
 </div>
@@ -7815,11 +7910,11 @@ Date Range: 2020-03-11 to 2020-04-30 (51 active days)
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="%F0%9F%92%A1-Ingestion-Audit-&amp;-Data-Integrity-Findings">💡 Ingestion Audit &amp; Data Integrity Findings<a class="anchor-link" href="#%F0%9F%92%A1-Ingestion-Audit-&amp;-Data-Integrity-Findings">¶</a></h3><p>Initial inspection of the 278,848 raw test records reveals three fundamental data characteristics:</p>
+<h3 id="%F0%9F%92%A1-Ingestion-Audit-&amp;-Data-Integrity-Findings">💡 Ingestion Audit &amp; Data Integrity Findings<a class="anchor-link" href="#%F0%9F%92%A1-Ingestion-Audit-&amp;-Data-Integrity-Findings">¶</a></h3><p>Inspecting the raw records reveals three important characteristics of the data:</p>
 <ol>
-<li><strong>Temporal Span:</strong> 51 continuous days capturing the emergence and acceleration of the first epidemic wave in Israel.</li>
-<li><strong>Target Heterogeneity:</strong> The target column <code>corona_result</code> contains three distinct values: <code>negative</code>, <code>positive</code>, and <code>other</code> (indeterminate test outcomes requiring filtration).</li>
-<li><strong>Missingness Distribution:</strong> Clinical symptom reporting is relatively complete, but <code>gender</code> contains 19,445 missing entries (~7%), and <code>age_60_and_above</code> exhibits temporal truncation that requires careful auditing.</li>
+<li><strong>Timeframe:</strong> 51 continuous days capturing the emergence and peak of the initial epidemic wave in Israel.</li>
+<li><strong>Test Outcomes:</strong> The <code>corona_result</code> column includes <code>negative</code>, <code>positive</code>, and a small set of <code>other</code> results (inconclusive swabs that need removing).</li>
+<li><strong>Missing Data:</strong> Clinical symptoms are well-recorded, but <code>gender</code> has 19,445 missing entries (around 7%), and <code>age_60_and_above</code> stops being recorded partway through the dataset.</li>
 </ol>
 </div>
 </div>
@@ -7831,8 +7926,8 @@ Date Range: 2020-03-11 to 2020-04-30 (51 active days)
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="2.2-Preprocessing-&amp;-Cohort-Filtration">2.2 Preprocessing &amp; Cohort Filtration<a class="anchor-link" href="#2.2-Preprocessing-&amp;-Cohort-Filtration">¶</a></h3><p>To ensure absolute ground-truth fidelity, we eliminate 3,892 indeterminate <code>other</code> laboratory results. Rather than synthetically imputing missing gender values—which introduces synthetic distribution artifacts—we enforce complete demographic records, dropping 19,445 missing gender records (under 7% of data).</p>
-<p>We standardize binary symptom indicators (<code>cough</code>, <code>fever</code>, <code>sore_throat</code>, <code>shortness_of_breath</code>, <code>head_ache</code>), convert <code>gender</code> into a binary <code>male</code> flag, and map <code>age_60_and_above</code> and <code>corona_result</code> into numeric $\{0, 1\}$ format.</p>
+<h3 id="2.2-Cleaning-the-Data-&amp;-Filtering-the-Cohort">2.2 Cleaning the Data &amp; Filtering the Cohort<a class="anchor-link" href="#2.2-Cleaning-the-Data-&amp;-Filtering-the-Cohort">¶</a></h3><p>To maintain high data quality, we drop the 3,892 inconclusive <code>other</code> swab results. Rather than guessing missing genders through synthetic imputation, we remove the 19,445 records with missing gender—representing less than 7% of the data—ensuring we only train on verified patient records.</p>
+<p>We then standardise the binary symptom flags, convert <code>gender</code> into a binary <code>male</code> indicator, and encode <code>age_60_and_above</code> and <code>corona_result</code> as clean $\{0, 1\}$ numbers.</p>
 </div>
 </div>
 </div>
@@ -7893,12 +7988,12 @@ Name: proportion, dtype: object
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="%F0%9F%92%A1-Cohort-Filtration-Findings-&amp;-Clean-Dataset-Baseline">💡 Cohort Filtration Findings &amp; Clean Dataset Baseline<a class="anchor-link" href="#%F0%9F%92%A1-Cohort-Filtration-Findings-&amp;-Clean-Dataset-Baseline">¶</a></h3><p>Dropping ambiguous test results and unverified demographics yields a pristine analytical cohort:</p>
+<h3 id="%F0%9F%92%A1-Cohort-Cleaning-Findings">💡 Cohort Cleaning Findings<a class="anchor-link" href="#%F0%9F%92%A1-Cohort-Cleaning-Findings">¶</a></h3><p>Removing ambiguous tests and incomplete records gives us a reliable baseline cohort:</p>
 <ul>
-<li><strong>Filtered Cohort Size:</strong> <strong>255,668 verified patients</strong> (retaining 91.7% of the original nationwide dataset).</li>
+<li><strong>Verified Cohort Size:</strong> <strong>255,668 patients</strong> (retaining 91.7% of the original nationwide records).</li>
 <li><strong>Confirmed Negative Tests:</strong> 242,137 individuals (94.71%).</li>
 <li><strong>Confirmed Positive Tests:</strong> 13,531 individuals (5.29%).</li>
-<li><strong>Statistical Rigour:</strong> Because the clean cohort exceeds a quarter-million observations, dropping missing gender cases preserves 100% verified ground truth without sacrificing statistical power.</li>
+<li><strong>Data Integrity:</strong> With over a quarter of a million confirmed tests remaining, filtering out missing values preserves clean ground truth without losing statistical reliability.</li>
 </ul>
 </div>
 </div>
@@ -7910,7 +8005,7 @@ Name: proportion, dtype: object
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="2.3-Exploratory-Data-Analysis:-The-Three-Epidemiological-Realities">2.3 Exploratory Data Analysis: The Three Epidemiological Realities<a class="anchor-link" href="#2.3-Exploratory-Data-Analysis:-The-Three-Epidemiological-Realities">¶</a></h3><h4 id="Reality-A:-The-Severe-Class-Imbalance-(94.7%25-vs-5.3%25)">Reality A: The Severe Class Imbalance (94.7% vs 5.3%)<a class="anchor-link" href="#Reality-A:-The-Severe-Class-Imbalance-(94.7%25-vs-5.3%25)">¶</a></h4><p>We visualize the target class distribution across the nationwide cohort to quantify the exact degree of class imbalance and evaluate its operational consequences on performance metrics.</p>
+<h3 id="2.3-Exploring-the-Data:-The-Three-Epidemiological-Realities">2.3 Exploring the Data: The Three Epidemiological Realities<a class="anchor-link" href="#2.3-Exploring-the-Data:-The-Three-Epidemiological-Realities">¶</a></h3><h4 id="Reality-A:-Severe-Class-Imbalance-(94.7%25-vs-5.3%25)">Reality A: Severe Class Imbalance (94.7% vs 5.3%)<a class="anchor-link" href="#Reality-A:-Severe-Class-Imbalance-(94.7%25-vs-5.3%25)">¶</a></h4><p>We plot the balance of positive and negative tests across the cohort to see the distribution first-hand and understand why standard metrics like accuracy are misleading.</p>
 </div>
 </div>
 </div>
@@ -7963,11 +8058,11 @@ Name: proportion, dtype: object
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="%F0%9F%92%A1-Epidemiological-Reality-A:-The-Accuracy-Fallacy">💡 Epidemiological Reality A: The Accuracy Fallacy<a class="anchor-link" href="#%F0%9F%92%A1-Epidemiological-Reality-A:-The-Accuracy-Fallacy">¶</a></h3><p>The class distribution highlights why naive predictive metrics fail in medical triage:</p>
+<h3 id="%F0%9F%92%A1-Reality-A-Findings:-Why-Accuracy-Fails">💡 Reality A Findings: Why Accuracy Fails<a class="anchor-link" href="#%F0%9F%92%A1-Reality-A-Findings:-Why-Accuracy-Fails">¶</a></h3><p>The class balance shows why standard accuracy cannot be trusted in healthcare screening:</p>
 <ul>
-<li><strong>Imbalance Ratio:</strong> ~17.6 negative tests for every confirmed positive test.</li>
-<li><strong>The Accuracy Fallacy:</strong> A trivial "Zero-Rule" baseline model that classifies every patient as COVID-negative achieves <strong>94.71% overall accuracy</strong> while failing to identify a single infected patient (0.0% Sensitivity).</li>
-<li><strong>Evaluation Standard:</strong> Model selection and threshold tuning must be governed strictly by <strong>ROC-AUC, Precision-Recall AUC (PR-AUC), and Sensitivity</strong>, not standard accuracy.</li>
+<li><strong>The Imbalance:</strong> There are roughly 17.6 negative tests for every single confirmed positive test.</li>
+<li><strong>The Accuracy Trap:</strong> A simple baseline model that guesses 'negative' for every single patient achieves <strong>94.71% accuracy</strong>, yet misses 100% of sick patients (0% sensitivity).</li>
+<li><strong>Our Evaluation Rule:</strong> We must judge models using <strong>ROC-AUC, Precision-Recall AUC (PR-AUC), and Sensitivity</strong>, rather than overall accuracy.</li>
 </ul>
 </div>
 </div>
@@ -7979,7 +8074,7 @@ Name: proportion, dtype: object
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="Reality-B:-Pervasive-Symptom-Reporting-Bias">Reality B: Pervasive Symptom Reporting Bias<a class="anchor-link" href="#Reality-B:-Pervasive-Symptom-Reporting-Bias">¶</a></h4><p>We examine symptom frequencies among confirmed positive versus negative cases to determine whether common clinical symptoms act as reliable standalone discriminators.</p>
+<h4 id="Reality-B:-Symptom-Reporting-Bias">Reality B: Symptom Reporting Bias<a class="anchor-link" href="#Reality-B:-Symptom-Reporting-Bias">¶</a></h4><p>Next, we compare how frequently symptoms were reported by people who tested positive versus those who tested negative, to see which symptoms genuinely help separate the two groups.</p>
 </div>
 </div>
 </div>
@@ -8043,10 +8138,10 @@ Name: proportion, dtype: object
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="%F0%9F%92%A1-Epidemiological-Reality-B:-Absolute-Prevalence-vs.-Relative-Specificity">💡 Epidemiological Reality B: Absolute Prevalence vs. Relative Specificity<a class="anchor-link" href="#%F0%9F%92%A1-Epidemiological-Reality-B:-Absolute-Prevalence-vs.-Relative-Specificity">¶</a></h3><p>The comparative symptom analysis reveals a vital clinical paradox:</p>
+<h3 id="%F0%9F%92%A1-Reality-B-Findings:-Common-Complaints-vs.-True-Clinical-Signals">💡 Reality B Findings: Common Complaints vs. True Clinical Signals<a class="anchor-link" href="#%F0%9F%92%A1-Reality-B-Findings:-Common-Complaints-vs.-True-Clinical-Signals">¶</a></h3><p>Comparing symptom rates reveals a crucial distinction:</p>
 <ul>
-<li><strong>High Prevalence, Lower Relative Specificity:</strong> <strong>Cough</strong> (47.9% vs. 14.5%) and <strong>Fever</strong> (39.4% vs. 6.8%) are the most common symptoms in absolute terms, but are frequently present in uninfected individuals due to background seasonal respiratory viruses.</li>
-<li><strong>Low Prevalence, High Relative Specificity:</strong> <strong>Headache</strong> (22.0% vs. 2.1%) and <strong>Sore Throat</strong> (13.7% vs. 1.3%) exhibit approximately a <strong>10× higher relative frequency</strong> in confirmed positive patients, serving as high-specificity clinical risk multipliers.</li>
+<li><strong>Common but Less Specific:</strong> <strong>Cough</strong> (47.9% in positives vs. 14.5% in negatives) and <strong>Fever</strong> (39.4% vs. 6.8%) are the most common symptoms in absolute terms, but they also appear in many negative cases due to background seasonal colds.</li>
+<li><strong>Rare but Highly Specific:</strong> <strong>Headache</strong> (22.0% vs. 2.1%) and <strong>Sore Throat</strong> (13.7% vs. 1.3%) are reported much less often overall, but appear roughly <strong>10 times more frequently in positive cases</strong>, making them strong clinical warning signs.</li>
 </ul>
 </div>
 </div>
@@ -8058,7 +8153,7 @@ Name: proportion, dtype: object
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="Reality-C:-The-Exposure-Multiplier-(test_indication)">Reality C: The Exposure Multiplier (<code>test_indication</code>)<a class="anchor-link" href="#Reality-C:-The-Exposure-Multiplier-(test_indication)">¶</a></h4><p>We analyze the third epidemiological driver: test indication. We one-hot encode <code>test_indication</code> into separate risk indicators (<code>Abroad</code>, <code>Contact with confirmed</code>, and <code>Other</code>) to assess infection rates across distinct exposure pathways.</p>
+<h4 id="Reality-C:-Exposure-as-a-Risk-Multiplier-(test_indication)">Reality C: Exposure as a Risk Multiplier (<code>test_indication</code>)<a class="anchor-link" href="#Reality-C:-Exposure-as-a-Risk-Multiplier-(test_indication)">¶</a></h4><p>We now look at why individuals were tested. We one-hot encode <code>test_indication</code> into separate indicators (<code>Abroad</code>, <code>Contact with confirmed</code>, and <code>Other</code>) to measure the infection rate across each route of exposure.</p>
 </div>
 </div>
 </div>
@@ -8120,10 +8215,10 @@ Name: proportion, dtype: object
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="%F0%9F%92%A1-Epidemiological-Reality-C:-Known-Contact-as-the-Primary-Risk-Factor">💡 Epidemiological Reality C: Known Contact as the Primary Risk Factor<a class="anchor-link" href="#%F0%9F%92%A1-Epidemiological-Reality-C:-Known-Contact-as-the-Primary-Risk-Factor">¶</a></h3><p>Exposure history proves to be the single most potent predictor of infection:</p>
+<h3 id="%F0%9F%92%A1-Reality-C-Findings:-Known-Contact-Drives-Infection-Risk">💡 Reality C Findings: Known Contact Drives Infection Risk<a class="anchor-link" href="#%F0%9F%92%A1-Reality-C-Findings:-Known-Contact-Drives-Infection-Risk">¶</a></h3><p>Looking at exposure history confirms that contact is the single strongest indicator of infection:</p>
 <ul>
-<li><strong>Contact with Confirmed Case:</strong> Patients reporting direct contact with a known COVID-19 case have an infection rate of <strong>71.2%</strong> (an odds ratio exceeding 40 relative to baseline).</li>
-<li><strong>International Travel:</strong> Individuals returning from abroad show an infection rate of <strong>6.1%</strong>, justifying its preservation as an independent feature rather than collapsing it into 'Other'.</li>
+<li><strong>Contact with a Confirmed Case:</strong> Patients who had direct contact with a known COVID-19 patient have an infection rate of <strong>71.2%</strong>.</li>
+<li><strong>Travel Abroad:</strong> Individuals returning from overseas show an infection rate of <strong>6.1%</strong>, justifying keeping travel as its own distinct indicator rather than grouping it into 'Other'.</li>
 </ul>
 </div>
 </div>
@@ -8135,7 +8230,7 @@ Name: proportion, dtype: object
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="2.4-The-April-15-Privacy-Redaction-&amp;-The-Two-Tier-Strategy">2.4 The April 15 Privacy Redaction &amp; The Two-Tier Strategy<a class="anchor-link" href="#2.4-The-April-15-Privacy-Redaction-&amp;-The-Two-Tier-Strategy">¶</a></h3><p>We plot the daily testing volume over the 51-day timeline, cross-tabulating <code>age_60_and_above</code> reporting completeness across each calendar day to audit temporal data consistency.</p>
+<h3 id="2.4-Discovering-the-April-15-Privacy-Redaction">2.4 Discovering the April 15 Privacy Redaction<a class="anchor-link" href="#2.4-Discovering-the-April-15-Privacy-Redaction">¶</a></h3><p>To check how consistent testing was over time, we plot daily testing volume across the 51 days and track whether <code>age_60_and_above</code> was recorded on each date.</p>
 </div>
 </div>
 </div>
@@ -8196,13 +8291,13 @@ Name: proportion, dtype: object
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="%F0%9F%92%A1-Discovery:-The-April-15-Regulatory-Age-Redaction-Cliff">💡 Discovery: The April 15 Regulatory Age Redaction Cliff<a class="anchor-link" href="#%F0%9F%92%A1-Discovery:-The-April-15-Regulatory-Age-Redaction-Cliff">¶</a></h3><p>The temporal volume plot exposes a major regulatory shift:</p>
+<h3 id="%F0%9F%92%A1-Key-Finding:-The-April-15-Age-Redaction-Cliff">💡 Key Finding: The April 15 Age Redaction Cliff<a class="anchor-link" href="#%F0%9F%92%A1-Key-Finding:-The-April-15-Age-Redaction-Cliff">¶</a></h3><p>The daily timeline reveals an unexpected regulatory shift:</p>
 <ul>
-<li><strong>Pre-April 15:</strong> Between 11 March and 14 April 2020, <code>age_60_and_above</code> is 100% recorded across all tests.</li>
-<li><strong>The Redaction Cliff:</strong> On <strong>15 April 2020</strong>, <code>age_60_and_above</code> abruptly drops to <strong>100% missing</strong> (redacted by the Israeli MoH to prevent citizen re-identification through demographic database linkage).</li>
-<li><strong>Architectural Decision:</strong> We establish a <strong>Two-Tier Modeling Strategy</strong>:<ul>
-<li><strong>Tier A (Benchmark Cohort):</strong> Tests up to 14 April with complete age data ($n = 136,294$) used to replicate the published <em>Zoabi et al.</em> benchmark.</li>
-<li><strong>Tier B (Resilient Symptom-Only Model):</strong> Ablating age to guarantee the triage model remains operational after regulatory privacy interventions.</li>
+<li><strong>Before 15 April:</strong> Between 11 March and 14 April 2020, <code>age_60_and_above</code> was recorded for 100% of tests.</li>
+<li><strong>The Cliff:</strong> On <strong>15 April 2020</strong>, <code>age_60_and_above</code> suddenly became <strong>100% missing</strong> because the Ministry of Health stopped releasing age data to protect patient privacy.</li>
+<li><strong>Our Two-Tier Strategy:</strong><ul>
+<li><strong>Tier A (Benchmark Cohort):</strong> We use tests up to 14 April with complete age data ($n = 136,294$) to replicate the published <em>Zoabi et al.</em> benchmark.</li>
+<li><strong>Tier B (Symptom-Only Model):</strong> We build and evaluate a model without age, proving our triage system still works even when privacy regulations remove demographic features.</li>
 </ul>
 </li>
 </ul>
@@ -8216,20 +8311,20 @@ Name: proportion, dtype: object
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Phase-3:-Benchmark-Model-Replication-(Zoabi-et-al.)-&amp;-Zero-Leakage-Pipeline-Architecture">Phase 3: Benchmark Model Replication (Zoabi et al.) &amp; Zero-Leakage Pipeline Architecture<a class="anchor-link" href="#Phase-3:-Benchmark-Model-Replication-(Zoabi-et-al.)-&amp;-Zero-Leakage-Pipeline-Architecture">¶</a></h2><h3 id="3.1-Zero-Leakage-Preprocessing-&amp;-Prospective-Chronological-Partitioning">3.1 Zero-Leakage Preprocessing &amp; Prospective Chronological Partitioning<a class="anchor-link" href="#3.1-Zero-Leakage-Preprocessing-&amp;-Prospective-Chronological-Partitioning">¶</a></h3><p>To rigorously mirror real-world hospital deployment, we enforce the <strong>epidemiological "Arrow of Time"</strong>:</p>
+<h2 id="Phase-3:-Benchmark-Model-Replication-(Zoabi-et-al.)-&amp;-Pipeline-Architecture">Phase 3: Benchmark Model Replication (Zoabi et al.) &amp; Pipeline Architecture<a class="anchor-link" href="#Phase-3:-Benchmark-Model-Replication-(Zoabi-et-al.)-&amp;-Pipeline-Architecture">¶</a></h2><h3 id="3.1-Zero-Leakage-Pipeline-&amp;-Prospective-Time-Split">3.1 Zero-Leakage Pipeline &amp; Prospective Time Split<a class="anchor-link" href="#3.1-Zero-Leakage-Pipeline-&amp;-Prospective-Time-Split">¶</a></h3><p>To mirror real hospital deployment, we respect the <strong>chronological order of time</strong>:</p>
 <ul>
-<li><strong>Training Window (Historical):</strong> 22 March – 7 April 2020 ($n = 98,989$; 7,614 positive cases, 7.69% prevalence).</li>
-<li><strong>Hold-Out Window (Prospective):</strong> 8 April – 14 April 2020 ($n = 37,305$; 2,261 positive cases, 6.06% prevalence).</li>
+<li><strong>Historical Training Period:</strong> 22 March – 7 April 2020 ($n = 98,989$; 7,614 positive cases, 7.69% positive rate).</li>
+<li><strong>Prospective Hold-out Test Period:</strong> 8 April – 14 April 2020 ($n = 37,305$; 2,261 positive cases, 6.06% positive rate).</li>
 </ul>
-<p>We encapsulate categorical transformations (<code>OneHotEncoder(handle_unknown='ignore')</code> on <code>test_indication</code>) and binary passthroughs within a formal Scikit-Learn <code>Pipeline</code>. Transformers are fitted strictly on historical training data to guarantee zero look-ahead leakage.</p>
-<p>We benchmark five model architectures using 5-fold stratified cross-validation within the training window (<code>seed = 5</code>):</p>
+<p>We wrap our feature preparation (<code>OneHotEncoder</code> on <code>test_indication</code> and symptom passthroughs) inside an airtight Scikit-Learn <code>Pipeline</code>. Transformers are fitted strictly on training data so no future information leaks backwards.</p>
+<p>We benchmark five model architectures using 5-fold stratified cross-validation on the training window (<code>seed = 5</code>):</p>
 <ol>
-<li><strong>Zero-Rule Dummy Classifier</strong></li>
-<li><strong>Logistic Regression (Linear Baseline)</strong></li>
-<li><strong>Single Decision Tree (<code>max_depth=5</code>)</strong></li>
-<li><strong>Random Forest (100 Trees, Bagging)</strong></li>
-<li><strong>LightGBM Champion (Paper Hyperparameters: <code>num_leaves=20</code>, <code>min_child_samples=4</code>, <code>learning_rate=0.05</code>, <code>is_unbalance=True</code>)</strong></li>
-<li><strong>LightGBM Symptom-Only (Ablating Age)</strong></li>
+<li><strong>Zero-Rule Dummy Classifier</strong> (majority baseline)</li>
+<li><strong>Logistic Regression</strong> (linear baseline)</li>
+<li><strong>Single Decision Tree</strong> (<code>max_depth=5</code>, replicating the paper's interpretable tree)</li>
+<li><strong>Random Forest</strong> (100 trees, parallel bagging)</li>
+<li><strong>LightGBM Champion</strong> (using the paper's parameters: <code>num_leaves=20</code>, <code>min_child_samples=4</code>, <code>learning_rate=0.05</code>, <code>is_unbalance=True</code>)</li>
+<li><strong>LightGBM Symptom-Only</strong> (trained without age)</li>
 </ol>
 </div>
 </div>
@@ -8449,14 +8544,14 @@ Name: proportion, dtype: object
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="%F0%9F%92%A1-Benchmark-Training-&amp;-5-Fold-Cross-Validation-Summary">💡 Benchmark Training &amp; 5-Fold Cross-Validation Summary<a class="anchor-link" href="#%F0%9F%92%A1-Benchmark-Training-&amp;-5-Fold-Cross-Validation-Summary">¶</a></h3><p>Cross-validation within the historical training cohort (<code>seed = 5</code>) demonstrates clear separation across model families:</p>
+<h3 id="%F0%9F%92%A1-Benchmark-Training-&amp;-5-Fold-Cross-Validation-Summary">💡 Benchmark Training &amp; 5-Fold Cross-Validation Summary<a class="anchor-link" href="#%F0%9F%92%A1-Benchmark-Training-&amp;-5-Fold-Cross-Validation-Summary">¶</a></h3><p>Cross-validation on the training cohort (<code>seed = 5</code>) shows a clear performance hierarchy:</p>
 <ul>
-<li><strong>Zero-Rule Dummy:</strong> CV AUC = <code>0.5000</code> (Accuracy = 94.71%, misses all infected individuals).</li>
+<li><strong>Zero-Rule Dummy:</strong> CV AUC = <code>0.5000</code> (shows the baseline floor).</li>
 <li><strong>Logistic Regression:</strong> CV AUC = <code>0.9280 ± 0.0052</code>.</li>
 <li><strong>Decision Tree (depth=5):</strong> CV AUC = <code>0.9226 ± 0.0045</code>.</li>
 <li><strong>Random Forest (100 trees):</strong> CV AUC = <code>0.9348 ± 0.0052</code>.</li>
-<li><strong>LightGBM Champion (Full with Age):</strong> CV AUC = <strong><code>0.9351 ± 0.0025</code></strong>.</li>
-<li><strong>LightGBM Symptom-Only (No Age):</strong> CV AUC = <strong><code>0.9333 ± 0.0022</code></strong> (a negligible decline of only 0.0018 AUC, proving that symptoms and exposure drive the vast majority of predictive power).</li>
+<li><strong>LightGBM Champion (with Age):</strong> CV AUC = <strong><code>0.9351 ± 0.0025</code></strong>.</li>
+<li><strong>LightGBM Symptom-Only (No Age):</strong> CV AUC = <strong><code>0.9333 ± 0.0022</code></strong> (a tiny difference of just 0.0018 AUC, proving that symptoms and exposure drive almost all the predictive power).</li>
 </ul>
 </div>
 </div>
@@ -8468,7 +8563,7 @@ Name: proportion, dtype: object
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="3.2-Prospective-Hold-Out-Evaluation-&amp;-Comparative-ROC-Curves">3.2 Prospective Hold-Out Evaluation &amp; Comparative ROC Curves<a class="anchor-link" href="#3.2-Prospective-Hold-Out-Evaluation-&amp;-Comparative-ROC-Curves">¶</a></h3><p>We evaluate all trained models on the unseen prospective hold-out test set (8–14 April 2020, $n = 37,305$), plotting prospective ROC curves and calculating Hold-out ROC-AUC and PR-AUC.</p>
+<h3 id="3.2-Evaluating-on-the-Prospective-Hold-Out-Test-Set">3.2 Evaluating on the Prospective Hold-Out Test Set<a class="anchor-link" href="#3.2-Evaluating-on-the-Prospective-Hold-Out-Test-Set">¶</a></h3><p>We now test all models on unseen future patients from 8–14 April 2020 ($n = 37,305$). We plot their ROC curves side-by-side and calculate Hold-out ROC-AUC and PR-AUC.</p>
 </div>
 </div>
 </div>
@@ -8526,11 +8621,11 @@ Name: proportion, dtype: object
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="%F0%9F%92%A1-Prospective-Validation-&amp;-Benchmark-Replication-Findings">💡 Prospective Validation &amp; Benchmark Replication Findings<a class="anchor-link" href="#%F0%9F%92%A1-Prospective-Validation-&amp;-Benchmark-Replication-Findings">¶</a></h3><p>Evaluation on the prospective hold-out test set confirms successful replication of the published Nature benchmark:</p>
+<h3 id="%F0%9F%92%A1-Prospective-Validation-Findings">💡 Prospective Validation Findings<a class="anchor-link" href="#%F0%9F%92%A1-Prospective-Validation-Findings">¶</a></h3><p>Testing on future hold-out data confirms we have successfully replicated the <em>Nature</em> paper:</p>
 <ul>
-<li><strong>LightGBM Full Model (with Age):</strong> Achieves <strong>ROC-AUC = 0.8443</strong> (PR-AUC = <strong>0.5448</strong>), replicating the 0.84–0.86 prospective test range reported by <em>Zoabi et al.</em></li>
-<li><strong>LightGBM Symptom-Only Model (without Age):</strong> Achieves <strong>ROC-AUC = 0.8448</strong> (PR-AUC = <strong>0.5403</strong>), demonstrating complete resilience to regulatory demographic redaction.</li>
-<li><strong>Linear vs. Non-Linear Separation:</strong> Gradient boosting significantly outperforms linear logistic regression (0.8336) and single decision trees (0.8357), proving that non-linear feature interactions are essential for accurate clinical risk estimation.</li>
+<li><strong>LightGBM Full Model (with Age):</strong> Achieves <strong>ROC-AUC = 0.8443</strong> (PR-AUC = <strong>0.5448</strong>), sitting right in the paper's reported 0.84–0.86 range.</li>
+<li><strong>LightGBM Symptom-Only Model (without Age):</strong> Achieves <strong>ROC-AUC = 0.8448</strong> (PR-AUC = <strong>0.5403</strong>), matching the full model and proving the system remains robust even if age data is removed.</li>
+<li><strong>Linear vs Non-Linear:</strong> Gradient boosting clearly outperforms linear logistic regression (0.8336) and single trees (0.8357), confirming that capturing combinations of symptoms is essential.</li>
 </ul>
 </div>
 </div>
@@ -8542,7 +8637,7 @@ Name: proportion, dtype: object
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Phase-4:-Advanced-Modeling-&amp;-Interpretability">Phase 4: Advanced Modeling &amp; Interpretability<a class="anchor-link" href="#Phase-4:-Advanced-Modeling-&amp;-Interpretability">¶</a></h2><h3 id="4.1-Boosting-Engine-Benchmarking:-XGBoost-Classifier">4.1 Boosting Engine Benchmarking: XGBoost Classifier<a class="anchor-link" href="#4.1-Boosting-Engine-Benchmarking:-XGBoost-Classifier">¶</a></h3><p>To assess whether the predictive performance is an artifact of the LightGBM library or an inherent property of tree-based gradient boosting, we implement and benchmark an <strong>XGBoost Classifier</strong> (<code>max_depth=4</code>, <code>learning_rate=0.05</code>, <code>scale_pos_weight=17.6</code>, <code>seed=5</code>) within the identical zero-leakage Scikit-Learn pipeline.</p>
+<h2 id="Phase-4:-Advanced-Modeling-&amp;-Interpretability">Phase 4: Advanced Modeling &amp; Interpretability<a class="anchor-link" href="#Phase-4:-Advanced-Modeling-&amp;-Interpretability">¶</a></h2><h3 id="4.1-Checking-Boosting-Invariance-with-XGBoost">4.1 Checking Boosting Invariance with XGBoost<a class="anchor-link" href="#4.1-Checking-Boosting-Invariance-with-XGBoost">¶</a></h3><p>To make sure our results reflect the power of gradient boosted trees rather than quirks of the LightGBM library, we train an <strong>XGBoost Classifier</strong> (<code>max_depth=4</code>, <code>learning_rate=0.05</code>, <code>scale_pos_weight=17.6</code>, <code>seed=5</code>) using the same zero-leakage pipeline.</p>
 </div>
 </div>
 </div>
@@ -8603,12 +8698,12 @@ XGBoost Benchmark:  ROC-AUC = 0.8445 | PR-AUC = 0.5463
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="%F0%9F%92%A1-XGBoost-Benchmark-Findings:-Boosting-Engine-Invariance">💡 XGBoost Benchmark Findings: Boosting Engine Invariance<a class="anchor-link" href="#%F0%9F%92%A1-XGBoost-Benchmark-Findings:-Boosting-Engine-Invariance">¶</a></h3><p>The XGBoost prospective hold-out evaluation demonstrates:</p>
+<h3 id="%F0%9F%92%A1-XGBoost-Benchmark-Findings">💡 XGBoost Benchmark Findings<a class="anchor-link" href="#%F0%9F%92%A1-XGBoost-Benchmark-Findings">¶</a></h3><p>Testing XGBoost on the prospective test cohort gives almost identical results:</p>
 <ul>
 <li><strong>Prospective ROC-AUC:</strong> <strong>0.8448</strong> (matching LightGBM's 0.8443 / 0.8448).</li>
-<li><strong>Prospective PR-AUC:</strong> <strong>0.5480</strong> (closely matching LightGBM's 0.5448).</li>
-<li><strong>Train 5-Fold CV AUC:</strong> <strong>0.9350 ± 0.0025</strong>.</li>
-<li><strong>Clinical Finding:</strong> Confirms boosting engine invariance: gradient boosted decision trees provide the optimal tabular inductive bias for rapid symptom triage regardless of the specific software implementation.</li>
+<li><strong>Prospective PR-AUC:</strong> <strong>0.5480</strong> (matching LightGBM's 0.5448).</li>
+<li><strong>5-Fold Training CV AUC:</strong> <strong>0.9350 ± 0.0025</strong>.</li>
+<li><strong>Key Takeaway:</strong> Both boosting engines perform consistently well, showing that gradient boosting is naturally suited to this clinical triage problem.</li>
 </ul>
 </div>
 </div>
@@ -8620,7 +8715,7 @@ XGBoost Benchmark:  ROC-AUC = 0.8445 | PR-AUC = 0.5463
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="4.2-Clinical-Explainability:-Game-Theoretic-TreeSHAP-Attribution">4.2 Clinical Explainability: Game-Theoretic TreeSHAP Attribution<a class="anchor-link" href="#4.2-Clinical-Explainability:-Game-Theoretic-TreeSHAP-Attribution">¶</a></h3><p>In clinical decision support, black-box predictions are unviable. We compute exact game-theoretic <strong>TreeSHAP (SHapley Additive exPlanations)</strong> values for the champion LightGBM model on the hold-out test set, visualizing global feature importance rankings and beeswarm attribution distributions.</p>
+<h3 id="4.2-Explaining-Model-Predictions-with-TreeSHAP">4.2 Explaining Model Predictions with TreeSHAP<a class="anchor-link" href="#4.2-Explaining-Model-Predictions-with-TreeSHAP">¶</a></h3><p>Clinicians cannot rely on black-box predictions. Using game-theoretic <strong>TreeSHAP (SHapley Additive exPlanations)</strong> on our champion LightGBM model, we examine which features have the greatest overall impact on patient risk scores.</p>
 </div>
 </div>
 </div>
@@ -8679,11 +8774,11 @@ XGBoost Benchmark:  ROC-AUC = 0.8445 | PR-AUC = 0.5463
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="%F0%9F%92%A1-TreeSHAP-Clinical-Feature-Attribution-Findings">💡 TreeSHAP Clinical Feature Attribution Findings<a class="anchor-link" href="#%F0%9F%92%A1-TreeSHAP-Clinical-Feature-Attribution-Findings">¶</a></h3><p>The SHAP feature attribution plots explain the exact biological and clinical logic of the model:</p>
+<h3 id="%F0%9F%92%A1-TreeSHAP-Clinical-Explanation-Findings">💡 TreeSHAP Clinical Explanation Findings<a class="anchor-link" href="#%F0%9F%92%A1-TreeSHAP-Clinical-Explanation-Findings">¶</a></h3><p>The SHAP feature attribution plots show the exact clinical reasoning of the model:</p>
 <ul>
-<li><strong>Contact with Confirmed Case</strong> is the single strongest positive risk driver, shifting log-odds by more than +1.2 on average.</li>
+<li><strong>Contact with a Confirmed Case</strong> is by far the strongest risk factor, adding more than +1.2 to the log-odds of infection on average.</li>
 <li><strong>Fever, Cough, and Headache</strong> provide the highest clinical symptom contributions.</li>
-<li><strong>Demographics:</strong> Male gender and age $\ge 60$ provide modest baseline risk elevations, but reported clinical symptoms and contact history drive the vast majority of individual risk scores.</li>
+<li><strong>Demographics:</strong> Male sex and age 60+ add modest baseline risk increases, but reported symptoms and direct contact drive the vast majority of individual triage decisions.</li>
 </ul>
 </div>
 </div>
@@ -8695,7 +8790,7 @@ XGBoost Benchmark:  ROC-AUC = 0.8445 | PR-AUC = 0.5463
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="4.3-Unsupervised-Symptom-Phenotyping:-2D-t-SNE-Topological-Clustering">4.3 Unsupervised Symptom Phenotyping: 2D t-SNE Topological Clustering<a class="anchor-link" href="#4.3-Unsupervised-Symptom-Phenotyping:-2D-t-SNE-Topological-Clustering">¶</a></h3><p>To explore whether patients form natural clinical sub-phenotypes without supervising labels, we project the high-dimensional binary symptom vectors of 2,000 hold-out patients into a 2D manifold using <strong>t-Distributed Stochastic Neighbor Embedding (t-SNE)</strong> (<code>perplexity=30</code>, <code>random_state=5</code>), coloring patients by confirmed infection status.</p>
+<h3 id="4.3-Unsupervised-Symptom-Clustering-(2D-t-SNE)">4.3 Unsupervised Symptom Clustering (2D t-SNE)<a class="anchor-link" href="#4.3-Unsupervised-Symptom-Clustering-(2D-t-SNE)">¶</a></h3><p>To see whether patients naturally fall into distinct clinical groups without relying on labels, we project the symptom patterns of 2,000 test patients onto a 2D map using <strong>t-SNE</strong> (<code>perplexity=30</code>, <code>seed=5</code>), colouring points by confirmed infection status.</p>
 </div>
 </div>
 </div>
@@ -8762,10 +8857,10 @@ XGBoost Benchmark:  ROC-AUC = 0.8445 | PR-AUC = 0.5463
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="%F0%9F%92%A1-Unsupervised-Symptom-Phenotyping-Findings">💡 Unsupervised Symptom Phenotyping Findings<a class="anchor-link" href="#%F0%9F%92%A1-Unsupervised-Symptom-Phenotyping-Findings">¶</a></h3><p>The 2D topological embedding reveals clear physiological cluster separation:</p>
+<h3 id="%F0%9F%92%A1-Symptom-Clustering-Findings">💡 Symptom Clustering Findings<a class="anchor-link" href="#%F0%9F%92%A1-Symptom-Clustering-Findings">¶</a></h3><p>The 2D map shows clear groupings based on symptom combinations:</p>
 <ul>
-<li><strong>Cluster Separation:</strong> Patients naturally partition into distinct clinical clusters: asymptomatic individuals, isolated cough/fever cases, and a distinct multi-symptom cluster (fever + cough + headache + sore throat).</li>
-<li><strong>Infection Concentration:</strong> Confirmed COVID-19 positive cases (orange) concentrate heavily within the multi-symptom cluster, confirming that multi-symptom co-occurrence is the primary physical manifestation of active infection.</li>
+<li><strong>Distinct Groups:</strong> Patients separate naturally into asymptomatic individuals, those with isolated cough or fever, and a distinct multi-symptom group (fever, cough, headache, and sore throat together).</li>
+<li><strong>Where Infections Sit:</strong> Confirmed positive cases (in orange) concentrate heavily within the multi-symptom cluster, showing that combinations of symptoms are the strongest physical marker of infection.</li>
 </ul>
 </div>
 </div>
@@ -8777,7 +8872,7 @@ XGBoost Benchmark:  ROC-AUC = 0.8445 | PR-AUC = 0.5463
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="4.4-AI-Governance:-Demographic-Fairness-&amp;-Subgroup-Parity-Audit">4.4 AI Governance: Demographic Fairness &amp; Subgroup Parity Audit<a class="anchor-link" href="#4.4-AI-Governance:-Demographic-Fairness-&amp;-Subgroup-Parity-Audit">¶</a></h3><p>In compliance with NHS, WHO, and FDA guidelines for ethical healthcare AI, algorithms must not perpetuate bias or disparate diagnostic errors against protected groups. We slice the prospective hold-out cohort by gender (<code>Male</code> vs. <code>Female</code>) and age (<code>&lt;60</code> vs. <code>60+</code>), auditing subgroup ROC-AUC, PR-AUC, and selection rates under the champion model.</p>
+<h3 id="4.4-Checking-Algorithmic-Fairness-Across-Protected-Groups">4.4 Checking Algorithmic Fairness Across Protected Groups<a class="anchor-link" href="#4.4-Checking-Algorithmic-Fairness-Across-Protected-Groups">¶</a></h3><p>Healthcare models must perform fairly across different demographic groups. We break down model performance across gender (<code>Male</code> vs. <code>Female</code>) and age (<code>&lt;60</code> vs. <code>60+</code>) to audit whether any group suffers poorer triage accuracy.</p>
 </div>
 </div>
 </div>
@@ -8901,10 +8996,10 @@ XGBoost Benchmark:  ROC-AUC = 0.8445 | PR-AUC = 0.5463
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="%F0%9F%92%A1-Demographic-Fairness-&amp;-Subgroup-Parity-Findings">💡 Demographic Fairness &amp; Subgroup Parity Findings<a class="anchor-link" href="#%F0%9F%92%A1-Demographic-Fairness-&amp;-Subgroup-Parity-Findings">¶</a></h3><p>The demographic parity audit demonstrates equitable model performance across vulnerable populations:</p>
+<h3 id="%F0%9F%92%A1-Fairness-Audit-Findings">💡 Fairness Audit Findings<a class="anchor-link" href="#%F0%9F%92%A1-Fairness-Audit-Findings">¶</a></h3><p>The subgroup analysis confirms the model performs equitably across all groups:</p>
 <ul>
-<li><strong>Gender Disparity:</strong> Female ROC-AUC = <strong>0.8540</strong> (PR-AUC = 0.5186) vs. Male ROC-AUC = <strong>0.8243</strong> (PR-AUC = 0.5543). The model maintains robust discrimination across both genders with no disparate impact.</li>
-<li><strong>Age Disparity:</strong> Age $&lt;60$ ROC-AUC = <strong>0.8457</strong> vs. Age $\ge 60$ ROC-AUC = <strong>0.8328</strong>. The model provides reliable risk stratification for older adults who face the highest clinical vulnerability from COVID-19 complications.</li>
+<li><strong>Gender:</strong> Female ROC-AUC = <strong>0.8540</strong> vs. Male ROC-AUC = <strong>0.8243</strong>. The model discriminates effectively for both sexes without disadvantaging either group.</li>
+<li><strong>Age:</strong> Age $&lt;60$ ROC-AUC = <strong>0.8457</strong> vs. Age $\ge 60$ ROC-AUC = <strong>0.8328</strong>. Older individuals—who face the highest clinical vulnerability—receive reliable risk assessment.</li>
 </ul>
 </div>
 </div>
@@ -8916,8 +9011,8 @@ XGBoost Benchmark:  ROC-AUC = 0.8445 | PR-AUC = 0.5463
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Phase-5:-Operational-Decision-Thresholding">Phase 5: Operational Decision Thresholding<a class="anchor-link" href="#Phase-5:-Operational-Decision-Thresholding">¶</a></h2><h3 id="5.1-Asymmetric-Clinical-Cost-Sensitive-Threshold-Sweep">5.1 Asymmetric Clinical Cost-Sensitive Threshold Sweep<a class="anchor-link" href="#5.1-Asymmetric-Clinical-Cost-Sensitive-Threshold-Sweep">¶</a></h3><p>The standard classification cutoff of $	au = 0.50$ assumes equal error costs ($C_{\text{FN}} = C_{\text{FP}}$). In an epidemic, a False Negative (releasing an infected person to transmit the virus) incurs severe public health costs compared to a False Positive (administering a confirmatory swab).</p>
-<p>We sweep decision thresholds from $	au = 0.05$ to $	au = 0.50$ across the prospective hold-out cohort, computing Sensitivity, Specificity, True Positives, and False Negatives to identify the optimal clinical triage cutoff.</p>
+<h2 id="Phase-5:-Operational-Decision-Thresholding">Phase 5: Operational Decision Thresholding<a class="anchor-link" href="#Phase-5:-Operational-Decision-Thresholding">¶</a></h2><h3 id="5.1-Sweeping-Decision-Thresholds-for-Clinical-Triage">5.1 Sweeping Decision Thresholds for Clinical Triage<a class="anchor-link" href="#5.1-Sweeping-Decision-Thresholds-for-Clinical-Triage">¶</a></h3><p>Standard machine learning uses a 0.50 probability cutoff, assuming false alarms and missed cases carry equal cost. In an epidemic, a missed case (False Negative) allows infection to spread silently, while a false alarm (False Positive) simply means taking a confirmatory swab.</p>
+<p>We sweep thresholds from $\tau = 0.05$ to $\tau = 0.50$ across the prospective test cohort to find a sensible clinical cutoff.</p>
 </div>
 </div>
 </div>
@@ -9058,12 +9153,12 @@ XGBoost Benchmark:  ROC-AUC = 0.8445 | PR-AUC = 0.5463
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="%F0%9F%92%A1-Operational-Threshold-Analysis-&amp;-Clinical-Cutoff-Selection">💡 Operational Threshold Analysis &amp; Clinical Cutoff Selection<a class="anchor-link" href="#%F0%9F%92%A1-Operational-Threshold-Analysis-&amp;-Clinical-Cutoff-Selection">¶</a></h3><p>The threshold sweep demonstrates why default machine learning cutoffs fail in healthcare:</p>
+<h3 id="%F0%9F%92%A1-Decision-Threshold-Findings-&amp;-Policy-Recommendation">💡 Decision Threshold Findings &amp; Policy Recommendation<a class="anchor-link" href="#%F0%9F%92%A1-Decision-Threshold-Findings-&amp;-Policy-Recommendation">¶</a></h3><p>The threshold sweep clearly shows why the default 0.50 cutoff is unsuitable for clinical triage:</p>
 <ul>
-<li><strong>Default Cutoff ($	au = 0.50$):</strong> Yields Sensitivity = <strong>75.1%</strong>, sending <strong>563 infected individuals home</strong> without testing.</li>
-<li><strong>Operational Triage Cutoff ($	au = 0.20$):</strong> Elevates Sensitivity to <strong>81.2%</strong> (capturing 1,836 of 2,261 infected patients), <strong>rescuing 137 infected patients</strong> who would have been missed under $	au = 0.50$, with Specificity = <strong>68.0%</strong>.</li>
-<li><strong>Emergency Lockdown Cutoff ($	au = 0.10$):</strong> Reaches <strong>94.3% Sensitivity</strong> (missing only 128 cases), but triggers 26,892 test referrals, which would overwhelm laboratory RT-PCR capacity.</li>
-<li><strong>Clinical Policy Recommendation:</strong> Deploy $	au = 0.20$ for outpatient digital triage to maximize case detection while maintaining sustainable lab throughput.</li>
+<li><strong>Default Cutoff ($\tau = 0.50$):</strong> Gives a Sensitivity of <strong>75.1%</strong>, which would send <strong>563 infected individuals home</strong> without testing.</li>
+<li><strong>Recommended Triage Cutoff ($\tau = 0.20$):</strong> Increases Sensitivity to <strong>81.2%</strong> (catching 1,836 of 2,261 positive cases) and <strong>rescues 137 infected patients</strong> who would have been missed under 0.50, while maintaining <strong>68.0% Specificity</strong>.</li>
+<li><strong>Emergency Cutoff ($\tau = 0.10$):</strong> Catches <strong>94.3%</strong> of cases, but triggers nearly 27,000 swab referrals, which would quickly overwhelm laboratory capacity.</li>
+<li><strong>Practical Policy:</strong> Using $\tau = 0.20$ for preliminary digital triage strikes the right balance between catching cases and keeping laboratory workloads manageable.</li>
 </ul>
 </div>
 </div>
@@ -9075,54 +9170,28 @@ XGBoost Benchmark:  ROC-AUC = 0.8445 | PR-AUC = 0.5463
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Phase-6:-Executive-Synthesis-&amp;-Clinical-Translation">Phase 6: Executive Synthesis &amp; Clinical Translation<a class="anchor-link" href="#Phase-6:-Executive-Synthesis-&amp;-Clinical-Translation">¶</a></h2><p>This section synthesizes the empirical findings across all six phases into operational guidelines for clinical deployment:</p>
+<h2 id="Closing-Summary:-What-the-Findings-Mean-for-Clinical-Triage">Closing Summary: What the Findings Mean for Clinical Triage<a class="anchor-link" href="#Closing-Summary:-What-the-Findings-Mean-for-Clinical-Triage">¶</a></h2><p>Bringing together our work across data cleaning, benchmark replication, explainability, fairness, and decision thresholds, four clear conclusions emerge for real-world deployment:</p>
 <hr/>
-<h3 id="1.-Clinical-Problem-Formulation-&amp;-Operational-Mandate">1. Clinical Problem Formulation &amp; Operational Mandate<a class="anchor-link" href="#1.-Clinical-Problem-Formulation-&amp;-Operational-Mandate">¶</a></h3><ul>
-<li><strong>The Clinical Need:</strong> During early 2020 testing kit shortages, healthcare systems required an automated, non-invasive screening mechanism to triage individuals before laboratory RT-PCR confirmation.</li>
-<li><strong>The Formulation:</strong> Binary diagnostic classification ($y \in \{0, 1\}$) using simple self-reported clinical symptoms, basic demographics, and epidemiological exposure, accessible in under 30 seconds via digital triage or smartphone.</li>
-<li><strong>The Methodological Mandate:</strong> Enforcing the "Arrow of Time" through prospective chronological validation (training on earlier dates, testing on future hold-out weeks) to prevent fatal temporal look-ahead leakage.</li>
-</ul>
+<h3 id="1.-The-Clinical-Problem-&amp;-Practical-Objective">1. The Clinical Problem &amp; Practical Objective<a class="anchor-link" href="#1.-The-Clinical-Problem-&amp;-Practical-Objective">¶</a></h3><p>During early epidemic waves when laboratory RT-PCR testing is heavily constrained, healthcare systems need a fast, non-invasive way to triage individuals before swabbing. By relying on simple self-reported symptoms and basic demographics that take under 30 seconds to answer, our pipeline provides an automated risk score to help healthcare teams prioritise who gets tested, isolated, or seen by a clinician first.</p>
+<p>To ensure our findings reflect real hospital conditions, we enforced the chronological order of time: training exclusively on earlier weeks and evaluating on future hold-out weeks. This prevents look-ahead leakage and tests whether the model can predict tomorrow's infections using only yesterday's data.</p>
 <hr/>
-<h3 id="2.-Epidemiological-Dataset-Characterization-&amp;-Preprocessing-Realities">2. Epidemiological Dataset Characterization &amp; Preprocessing Realities<a class="anchor-link" href="#2.-Epidemiological-Dataset-Characterization-&amp;-Preprocessing-Realities">¶</a></h3><ul>
-<li><strong>Source &amp; Scale:</strong> Nationwide Israeli Ministry of Health testing records (<code>corona_tested_individuals_ver_006.english.csv</code>): 278,848 tests across 51 consecutive days (11 March – 30 April 2020).</li>
-<li><strong>Cohort Filtration:</strong> Filtered out 3,892 inconclusive (<code>other</code>) results and 19,445 missing gender records, yielding a verified cohort of <strong>255,668 patients</strong>.</li>
-<li><strong>Key Epidemiological Realities:</strong><ol>
-<li><em>Severe Class Imbalance:</em> 94.71% Negative vs. 5.29% Positive (~17.6:1 ratio). Demonstrates why Accuracy is invalid (a naive dummy model gets 94.71% accuracy while missing 100% of sick patients).</li>
-<li><em>Symptom Reporting Bias:</em> Cough (47.9% vs 14.5%) and fever (39.4% vs 6.8%) are prevalent in absolute terms, but Headache and Sore Throat exhibit the highest relative discriminative power ($10\times$ higher frequency in positive cases).</li>
-<li><em>Exposure Risk:</em> Contact with confirmed cases carries a 71.2% infection rate; international travel carries 6.1% (which our pipeline preserved as a separate risk indicator rather than collapsing into 'Other').</li>
-<li><em>The April 15 Privacy Redaction:</em> Auditing revealed why <code>age_60_and_above</code> became 100% missing after April 14—health authorities intervened mid-epidemic to redact age and prevent patient re-identification linkage attacks.</li>
-</ol>
-</li>
+<h3 id="2.-What-the-Data-Taught-Us-About-Epidemiological-Realities">2. What the Data Taught Us About Epidemiological Realities<a class="anchor-link" href="#2.-What-the-Data-Taught-Us-About-Epidemiological-Realities">¶</a></h3><p>Working with 255,668 clean nationwide records from the Israeli Ministry of Health highlighted three critical realities:</p>
+<ul>
+<li><strong>The Accuracy Trap:</strong> With only 5.3% positive prevalence (~17.6 negatives for every positive), overall accuracy is meaningless. A naive model guessing 'negative' for everyone scores 94.7% accuracy while missing every single sick patient.</li>
+<li><strong>Symptom Specificity:</strong> Cough and fever are the most common complaints in absolute terms, but headache and sore throat are ten times more common in confirmed positive cases, making them powerful discriminators.</li>
+<li><strong>The April 15 Privacy Redaction:</strong> Auditing the dataset revealed that the Ministry of Health stopped releasing age data after 14 April to protect citizen privacy. Building a model that does not depend on age proved essential for long-term operational resilience.</li>
 </ul>
 <hr/>
-<h3 id="3.-Model-Zoo-Evaluation,-Boosting-Architectures-&amp;-Feature-Attribution">3. Model Zoo Evaluation, Boosting Architectures &amp; Feature Attribution<a class="anchor-link" href="#3.-Model-Zoo-Evaluation,-Boosting-Architectures-&amp;-Feature-Attribution">¶</a></h3><ul>
-<li><strong>Model Hierarchy &amp; Ensembling:</strong><ul>
-<li><em>Zero-Rule Dummy:</em> ROC-AUC = <strong>0.5000</strong> (Accuracy = 94.71%, but Sensitivity = 0.0%—misses all 2,261 positive cases).</li>
-<li><em>Logistic Regression:</em> ROC-AUC = <strong>0.8336</strong> (strong linear baseline, but misses non-linear symptom co-occurrences).</li>
-<li><em>Single Decision Tree (max_depth=5):</em> ROC-AUC = <strong>0.8357</strong> (replicates Zoabi et al. baseline; interpretable clinical rules).</li>
-<li><em>Random Forest (100 trees):</em> ROC-AUC = <strong>0.8412</strong> (reduces variance through parallel bagging).</li>
-<li><em>LightGBM Gradient Boosting:</em> ROC-AUC = <strong>0.8443</strong>, PR-AUC = <strong>0.5438</strong> (fastest training on 250k rows, leaf-wise tree growth, native handling of 5.3% imbalance via <code>is_unbalance=True</code>).</li>
-<li><em>XGBoost Benchmark:</em> ROC-AUC = <strong>0.8445</strong>, PR-AUC = <strong>0.5463</strong> (confirms boosting engine invariance; depth-wise tree growth).</li>
-</ul>
-</li>
-<li><strong>Feature Redundancy &amp; The Missing Age Finding:</strong><ul>
-<li>When <code>age_60_and_above</code> was ablated, our <strong>Symptom-Only model achieved ROC-AUC = 0.8448</strong>—matching the full model. This proves that symptoms and exposure drive infection risk, making the triage tool robust to demographic feature deprecation.</li>
-</ul>
-</li>
-<li><strong>Operational Threshold Selection:</strong><ul>
-<li>The default 0.50 cutoff misses 567 infected patients (74.9% sensitivity).</li>
-<li>Calibrating to a clinical triage cutoff of <strong>0.20</strong> increases sensitivity to <strong>81.2%</strong>, rescuing over 140 infected patients with an acceptable false-alarm rate for PCR swab prioritization.</li>
-</ul>
-</li>
+<h3 id="3.-Model-Learnings-&amp;-Clinical-Explainability">3. Model Learnings &amp; Clinical Explainability<a class="anchor-link" href="#3.-Model-Learnings-&amp;-Clinical-Explainability">¶</a></h3><ul>
+<li><strong>Boosting Outperforms Linear Baselines:</strong> Gradient boosted decision trees (LightGBM and XGBoost) achieved hold-out ROC-AUC scores of <strong>0.8443–0.8448</strong>, clearly outperforming linear logistic regression (0.8336) and single decision trees (0.8357) by capturing combinations of symptoms.</li>
+<li><strong>Symptom-Only Model Matches Full Model:</strong> When age was removed, our Symptom-Only model achieved a hold-out <strong>ROC-AUC of 0.8448</strong>—virtually identical to the full model. This proves that symptoms and contact history drive the vast majority of predictive power, meaning the tool remains clinically effective even under privacy redactions.</li>
+<li><strong>Transparent Clinical Attribution (TreeSHAP):</strong> Contact with a known COVID-19 patient is by far the strongest individual risk factor, followed by fever, cough, and headache. Demographic factors provide only modest baseline shifts.</li>
+<li><strong>Demographic Fairness:</strong> Auditing the model across gender (Female AUC 0.8540 vs. Male AUC 0.8243) and age (&lt;60 AUC 0.8457 vs. 60+ AUC 0.8328) confirmed equitable diagnostic accuracy across vulnerable groups.</li>
 </ul>
 <hr/>
-<h3 id="4.-Benchmark-Performance-&amp;-Clinical-Deployment-Scorecard">4. Benchmark Performance &amp; Clinical Deployment Scorecard<a class="anchor-link" href="#4.-Benchmark-Performance-&amp;-Clinical-Deployment-Scorecard">¶</a></h3><ul>
-<li><strong>Evaluation Protocol:</strong> Area Under the ROC Curve (ROC-AUC) evaluated strictly on the prospective hold-out test cohort (8–14 April, $n = 37,305$):<ul>
-<li><strong>Nature Benchmark Replication (LightGBM with Age):</strong> <strong>ROC-AUC = 0.8443</strong>, <strong>PR-AUC = 0.5438</strong> (matches Zoabi et al. prospective test range of 0.84–0.86).</li>
-<li><strong>Robust Symptom-Only Model (Without Age):</strong> <strong>ROC-AUC = 0.8448</strong>, <strong>PR-AUC = 0.5393</strong>.</li>
-<li><strong>XGBoost Benchmark:</strong> <strong>ROC-AUC = 0.8445</strong>, <strong>PR-AUC = 0.5463</strong>.</li>
-</ul>
-</li>
+<h3 id="4.-Benchmark-Performance-&amp;-Triage-Policy">4. Benchmark Performance &amp; Triage Policy<a class="anchor-link" href="#4.-Benchmark-Performance-&amp;-Triage-Policy">¶</a></h3><ul>
+<li><strong>Nature Benchmark Replicated:</strong> Our LightGBM model achieved a prospective hold-out <strong>ROC-AUC of 0.8443</strong> (PR-AUC = <strong>0.5448</strong>), directly replicating the 0.84–0.86 prospective range published by <em>Zoabi et al.</em></li>
+<li><strong>Deploying the Right Cutoff ($\tau = 0.20$):</strong> The standard 0.50 cutoff misses 567 infected patients (74.9% sensitivity). Lowering the decision threshold to <strong>$\tau = 0.20$</strong> elevates sensitivity to <strong>81.2%</strong>, catching over 140 infected patients with an acceptable false-positive rate for laboratory swab prioritisation.</li>
 </ul>
 </div>
 </div>
