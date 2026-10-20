@@ -1,3 +1,7 @@
+[![Open Pathway in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Llander22/Data-Science-Portfolio/blob/main/CS_L7_M10_Hackathon/M10-02-01_covid19_hackathon_pathway.ipynb)
+[![Open Workbook in Colab](https://img.shields.io/badge/Colab-Open_Workbook-orange?logo=googlecolab)](https://colab.research.google.com/github/Llander22/Data-Science-Portfolio/blob/main/CS_L7_M10_Hackathon/M10-02-02_covid19_hackathon.ipynb)
+[![View on GitHub](https://img.shields.io/badge/GitHub-View_Pathway.md-blue?logo=github)](https://github.com/Llander22/Data-Science-Portfolio/blob/main/CS_L7_M10_Hackathon/M10-02-01_covid19_hackathon_pathway.md)
+
 # Decision Pathway: COVID-19 Clinical Triage & Population Screening (Phase 4)
 ### Operational Standard: CRISP-DM & Machine Learning Engineering Lifecycle
 
@@ -15,7 +19,7 @@
 | **🔷 Stage 1: Problem Formulation & Clinical Triage** | **Phase 1: Clinical Problem Formulation** | Define binary diagnostic risk ($y \in \{0, 1\}$) under acute March 2020 RT-PCR scarcity. Mandate non-invasive 30-second self-reporting. Enforce the chronological "Arrow of Time". |
 | **🔷 Stage 2: Data Ingestion & Quality Auditing** | **Phase 2: Ingestion & Epidemiological EDA** | Audit 278,848 tests (51 days). Unmask 94.7% vs 5.3% class imbalance. Expose the "Accuracy Fallacy". Uncover the April 15 regulatory privacy redaction cliff. |
 | **🔷 Stage 3: Preprocessing & Pipeline Architecture** | **Phase 2 & 3: Preprocessing & Pipelines** | Filter 3,892 inconclusive targets and 19k missing gender records (clean cohort $n = 255,668$). Enforce zero-leakage Scikit-Learn `Pipeline` + prospective split (train: 22 March–7 April; test: 8–14 April). |
-| **🔷 Stage 4: Modeling & Benchmark Replication** | **Phase 3: Benchmark Replication (Zoabi et al.)** | Replicate *Zoabi et al.*: Decision Tree (0.8357), Random Forest (0.8412), LightGBM (0.8443, PR-AUC 0.5438), and XGBoost (0.8445). Validate via 5-fold CV within training window. |
+| **🔷 Stage 4: Modeling & Benchmark Replication** | **Phase 3: Benchmark Replication (Zoabi et al.)** | Replicate *Zoabi et al.*: Decision Tree (0.8357), Random Forest (0.8412), LightGBM (0.8443, PR-AUC 0.5448), and XGBoost (0.8445). Validate via 5-fold CV within training window. |
 | **🔷 Stage 5: Advanced Interpretability & Fairness** | **Phase 4: Advanced Modeling & Interpretability** | Generate TreeSHAP beeswarm and bar attribution. Unsupervised 2D t-SNE symptom phenotyping. Subgroup fairness audit across gender (AUC 0.824 vs 0.854) and age. |
 | **🔷 Stage 6: Operational Thresholding & Clinical Impact** | **Phase 5 & 6: Thresholding & Synthesis** | Reject arbitrary 0.50 threshold (misses 567 patients). Calibrate clinical cutoff to $\tau = 0.20$ (81.2% sensitivity, rescuing 141 infected patients). Synthesize operational triage findings and clinical recommendations. |
 
@@ -64,7 +68,7 @@ flowchart TD
 <div style="border: 1px solid #cbd5e1; background: #ffffff; border-radius: 8px; padding: 18px 20px;">
 
 #### 🔷 STAGE 1: Clinical Problem Formulation & Triage Mandate
-> 📖 **Workbook Mapping:** Section 1 *(Overview & Operational Problem Framing)*.
+> 📖 **Workbook Mapping:** Phase 1: Clinical Problem Formulation & Operational Framing.
 
 * 🟢 **Selected Option:** **Calibrated Binary Probability Classifier** — Estimating continuous infection risk $P(y=1|X) \in [0, 1]$ from 8 self-reported indicators accessible in under 30 seconds to prioritize RT-PCR laboratory swabs.
 * 🔴 **Rejected Option:** **Multiclass Categorization** — Unnecessary clinical overhead when the immediate operational decision during testing scarcity is strictly binary (administer PCR swab vs. isolate safely at home).
@@ -110,7 +114,7 @@ flowchart TD
 <div style="border: 1px solid #cbd5e1; background: #ffffff; border-radius: 8px; padding: 18px 20px;">
 
 #### 🔷 STAGE 2: Data Ingestion & Quality Auditing
-> 📖 **Workbook Mapping:** Section 1 & 2 *(Data Ingestion, Quality Auditing & Cohort Filtration)*.
+> 📖 **Workbook Mapping:** Phase 2: Ingestion & Epidemiological EDA (Sections 2.1–2.2).
 
 * 🟢 **Selected Option:** **Strict Ground Truth Filtration ($n = 255,668$)** — Drop inconclusive `other` outcomes (3,892) and missing gender records (19,445, <7%) to guarantee clinical label fidelity.
 * 🔴 **Rejected Option:** **Synthetic Imputation of Missing Gender** — Distorts demographic distributions without adding predictive power; dataset size (>255,000 verified cases) provides massive statistical power without synthetic risks.
@@ -154,7 +158,7 @@ flowchart TD
 <div style="border: 1px solid #cbd5e1; background: #ffffff; border-radius: 8px; padding: 18px 20px;">
 
 #### 🔷 STAGE 3: Preprocessing & Pipeline Architecture
-> 📖 **Workbook Mapping:** Section 3 *(Methodological Rigour: Prospective Validation)* & Section 5 *(Pipeline Architecture)*.
+> 📖 **Workbook Mapping:** Phase 2.3–2.4 (Cohort Filtration & Redaction Discovery) & Phase 3 (Zero-Leakage Pipeline Architecture).
 
 * 🟢 **Selected Option:** **Encapsulated `Pipeline` + Prospective Temporal Partitioning** — Preprocessing (`ColumnTransformer` with `OneHotEncoder(handle_unknown='ignore')` and symptom `passthrough`) encapsulated inside a Scikit-Learn `Pipeline` fit exclusively on historical training data (March 22 – April 7, $n=98,989$). Tested strictly on prospective hold-out (April 8–14, $n=37,305$).
 * 🔴 **Rejected Option:** **Random Shuffling (`train_test_split(shuffle=True)`)** — Disastrous look-ahead leakage across evolving epidemic waves; inflates scores artificially.
@@ -179,7 +183,7 @@ flowchart TD
     S4 --> H["Model Zoo Benchmarking<br/>Linear, bagging & boosting engines"]
     H --> I{"Validation<br/>Protocol?"}
     I -- "Direct Test Tuning" --> I_TEST["Test-Set Snooping<br/>[REJECTED: Overfits prospective hold-out]"]
-    I -- "Historical 5-Fold Stratified CV" --> I_CV["Historical 5-Fold Stratified CV<br/>[SELECTED: Quantifies variance (0.9352 ± 0.0052)]"]
+    I -- "Historical 5-Fold Stratified CV" --> I_CV["Historical 5-Fold Stratified CV<br/>[SELECTED: Quantifies variance (0.9351 ± 0.0025)]"]
     I_CV --> J{"Champion Model<br/>Architecture?"}
     J -- "Deep Neural Networks" --> J_NN["Multi-Layer Perceptrons<br/>[REJECTED: Poor tabular inductive bias]"]
     J -- "LightGBM & XGBoost" --> J_BOOST["LightGBM & XGBoost Champion<br/>[SELECTED: Fast boosting, ROC-AUC 0.8443 / 0.8445]"]
@@ -200,9 +204,9 @@ flowchart TD
 <div style="border: 1px solid #cbd5e1; background: #ffffff; border-radius: 8px; padding: 18px 20px;">
 
 #### 🔷 STAGE 4: Model Architecture & Boosting Benchmarks
-> 📖 **Workbook Mapping:** Section 5 *(Model Zoo Benchmarking & Pipeline Evaluation)* & Section 7 *(XGBoost)*.
+> 📖 **Workbook Mapping:** Phase 3 (Benchmark Replication: Zoabi et al. 2021) & Phase 4 (XGBoost Classifier Benchmark).
 
-* 🟢 **Selected Option:** **LightGBM Champion (`num_leaves=20`, `min_child_samples=4`, `learning_rate=0.05`, `is_unbalance=True`) & XGBoost Benchmark** — Fast histogram-based gradient boosting achieving ROC-AUC **0.8443** (PR-AUC 0.5438) and **0.8445** (PR-AUC 0.5463), verified via internal 5-fold CV ($0.9352 \pm 0.0052$).
+* 🟢 **Selected Option:** **LightGBM Champion (`num_leaves=20`, `min_child_samples=4`, `learning_rate=0.05`, `is_unbalance=True`) & XGBoost Benchmark** — Fast histogram-based gradient boosting achieving ROC-AUC **0.8443** (PR-AUC 0.5448) and **0.8448** (PR-AUC 0.5480), verified via internal 5-fold CV ($0.9352 \pm 0.0052$).
 * 🟢 **Selected Innovation:** **Symptom-Only LightGBM (Ablating Age)** — Achieves ROC-AUC **0.8448**, proving the triage engine survives regulatory age redaction (April 15 cliff).
 * 🔴 **Rejected Option:** **Deep Neural Networks** — Excessive compute overhead, slow inference, and inferior tabular performance compared to tree gradient boosting.
 * 🔴 **Rejected Option:** **Direct Test-Set Tuning (Test Snooping)** — Tuning against the test set leaks future outcomes; validation must occur strictly within training folds.
@@ -248,7 +252,7 @@ flowchart TD
 <div style="border: 1px solid #cbd5e1; background: #ffffff; border-radius: 8px; padding: 18px 20px;">
 
 #### 🔷 STAGE 5: Clinical Explainability & Demographic Fairness
-> 📖 **Workbook Mapping:** Section 7 *(Clinical Explainability, SHAP & Fairness Auditing)*.
+> 📖 **Workbook Mapping:** Phase 4: Advanced Modeling & Interpretability (TreeSHAP, 2D t-SNE Phenotyping & Subgroup Parity Audit).
 
 * 🟢 **Selected Option:** **TreeSHAP Explainability & Subgroup Demographic Fairness Audit** — Exact game-theoretic Shapley values reveal patient risk log-odds (`Contact with confirmed` and `Fever` dominate). Demographic slicing audits gender (Male AUC 0.8243 vs. Female AUC 0.8540) and age (<60 AUC 0.8457 vs. 60+ AUC 0.8328).
 * 🟢 **Selected Option:** **2D t-SNE Symptom Phenotyping (Extras)** — Unsupervised manifold mapping isolating distinct respiratory symptom clusters.
@@ -295,7 +299,7 @@ flowchart TD
 <div style="border: 1px solid #cbd5e1; background: #ffffff; border-radius: 8px; padding: 18px 20px;">
 
 #### 🔷 STAGE 6: Operational Decision Thresholding & Clinical Impact
-> 📖 **Workbook Mapping:** Section 6 & 8 *(Clinical Decision Thresholding & Operational Synthesis)*.
+> 📖 **Workbook Mapping:** Phase 5 (Operational Decision Thresholding) & Phase 6 (Executive Synthesis & Clinical Translation).
 
 * 🟢 **Selected Option:** **Calibrated Clinical Cutoff ($\tau = 0.20$)** — Elevates sensitivity to **81.2%** (capturing 1,836 of 2,261 infected patients), rescuing 141 individuals who would have been sent home under $\tau = 0.50$.
 * 🔴 **Rejected Option:** **Default $\tau = 0.50$ Cutoff** — Implicitly assumes equal error costs ($C_{\text{FN}} = C_{\text{FP}}$); disastrous in epidemics where false negatives drive silent community transmission.
@@ -320,8 +324,8 @@ All models are evaluated on the identical, unseen prospective hold-out cohort (8
 | **Logistic Regression (Linear Baseline)** | 8 Features | 0.9280 ± 0.0052 | 0.8336 | 0.4808 | 77.4% | 72.1% | Strong baseline, but linear boundary misses symptom co-occurrences. |
 | **Decision Tree Baseline (`depth=5`)** | 8 Features | 0.9226 ± 0.0045 | 0.8357 | 0.5062 | 78.1% | 71.5% | Replicates *Zoabi et al.* baseline; interpretable clinical tree rules. |
 | **Random Forest (100 Trees, Bagging)** | 8 Features | 0.9348 ± 0.0052 | 0.8412 | 0.5374 | 80.5% | 68.4% | Parallel variance reduction; stable non-linear partitioning. |
-| **LightGBM Champion (Paper Params)** | 8 Features | **0.9352 ± 0.0052** | **0.8443** | **0.5438** | **81.2%** | **68.0%** | **Replicates *Zoabi et al.* (0.84–0.86)**; fast leaf-wise boosting. |
-| **LightGBM Symptom-Only (No Age)** | 7 Features | **0.9333 ± 0.0052** | **0.8448** | **0.5393** | **81.5%** | **67.8%** | **Resilient model**: survives April 15 regulatory age privacy redaction. |
+| **LightGBM Champion (Paper Params)** | 8 Features | **0.9351 ± 0.0025** | **0.8443** | **0.5438** | **81.2%** | **68.0%** | **Replicates *Zoabi et al.* (0.84–0.86)**; fast leaf-wise boosting. |
+| **LightGBM Symptom-Only (No Age)** | 7 Features | **0.9333 ± 0.0022** | **0.8448** | **0.5393** | **81.5%** | **67.8%** | **Resilient model**: survives April 15 regulatory age privacy redaction. |
 | **XGBoost Benchmark (`max_depth=4`)** | 8 Features | **0.9350 ± 0.0052** | **0.8445** | **0.5463** | **81.4%** | **68.1%** | Confirms boosting engine invariance; depth-wise tree growth. |
 
 ---
