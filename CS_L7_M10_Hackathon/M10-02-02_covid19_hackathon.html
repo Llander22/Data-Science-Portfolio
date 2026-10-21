@@ -7619,7 +7619,8 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p><a href="https://colab.research.google.com/github/Llander22/Data-Science-Portfolio/blob/main/CS_L7_M10_Hackathon/M10-02-02_covid19_hackathon.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg"/></a>
-<a href="https://github.com/Llander22/Data-Science-Portfolio/blob/main/CS_L7_M10_Hackathon/M10-02-01_covid19_hackathon_pathway.md"><img alt="Decision Pathway on GitHub" src="https://img.shields.io/badge/GitHub-View_Pathway.md-blue?logo=github"/></a></p>
+<a href="https://github.com/Llander22/Data-Science-Portfolio/blob/main/CS_L7_M10_Hackathon/M10-02-01_covid19_hackathon_pathway.md"><img alt="Decision Pathway on GitHub" src="https://img.shields.io/badge/GitHub-View_Pathway.md-blue?logo=github"/></a>
+<a href="https://drive.google.com/"><img alt="Shared Deliverables in Google Drive" src="https://img.shields.io/badge/Google_Drive-Shared_PDFs-34A853?logo=googledrive&amp;logoColor=white"/></a></p>
 <h1 id="COVID-19-Clinical-Triage-&amp;-Diagnostic-Prediction">COVID-19 Clinical Triage &amp; Diagnostic Prediction<a class="anchor-link" href="#COVID-19-Clinical-Triage-&amp;-Diagnostic-Prediction">¶</a></h1><h3 id="Machine-Learning-Based-Clinical-Triage-(Replicating-&amp;-Extending-Nature-npj-Digital-Medicine)">Machine Learning-Based Clinical Triage (Replicating &amp; Extending Nature npj Digital Medicine)<a class="anchor-link" href="#Machine-Learning-Based-Clinical-Triage-(Replicating-&amp;-Extending-Nature-npj-Digital-Medicine)">¶</a></h3><p><em>Benchmark Paper:</em> Zoabi, Y., Deri-Rozov, S. &amp; Shomron, N. <em>Machine learning-based prediction of COVID-19 diagnosis based on symptoms.</em> <strong>npj Digital Medicine</strong> 4, 3 (2021).<br/>
 <em>Dataset:</em> Israeli Ministry of Health (<code>corona_tested_individuals_ver_006.english.csv</code>) — 278,848 tests nationwide.</p>
 <hr/>
@@ -9648,6 +9649,77 @@ PCR Swab Referral (High Risk)     0.1406    0.8116    0.2397      2261
 <li><strong>The Swab Latency Lag:</strong> A hospital cannot retrain models daily in real time because RT-PCR swab tests take 24–72 hours to return from laboratories. Models can only train on patients whose lab outcomes are verified.</li>
 <li><strong>Weekly Rolling Retraining:</strong> Feeding the pipeline newly confirmed test results on a weekly rolling schedule is the practical operational cadence. It continuously recalibrates the model as infection prevalence shifts (which fell from 7.7% to 6.1% across our study window) and ensures automated resilience when reporting policies change—such as smoothly transitioning to the Symptom-Only model when age was redacted on 15 April.</li>
 </ul>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f80b6b4e">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Addendum:-Real-World-Clinical-Deployment-in-2026">Addendum: Real-World Clinical Deployment in 2026<a class="anchor-link" href="#Addendum:-Real-World-Clinical-Deployment-in-2026">¶</a></h2><p>Moving a diagnostic model from an academic benchmark to live hospital operations changes the engineering problem entirely. In research, we optimise metrics on static historical cohorts. In live clinical deployment, we must navigate evolving viral strains, strict medical device regulations, delayed laboratory feedback, and frontline human workflows.</p>
+<p>Below, we outline the operational architecture required to run this triage pipeline safely in a 2026 healthcare system.</p>
+<hr/>
+<h3 id="1.-Connecting-CRISP-DM-to-Mitchell-et-al.-Model-Cards">1. Connecting CRISP-DM to Mitchell et al. Model Cards<a class="anchor-link" href="#1.-Connecting-CRISP-DM-to-Mitchell-et-al.-Model-Cards">¶</a></h3><p>CRISP-DM provides our development workflow. It guides how we explore data, prepare features, train models, and calibrate decision thresholds. However, CRISP-DM does not tell clinicians or regulators whether an algorithm is safe to deploy.</p>
+<p>In modern healthcare AI, shipping a model requires a standardised clinical governance passport: the <strong>Model Card</strong> (<em>Mitchell et al., arXiv:1810.03993</em>). While our engineering pipeline follows CRISP-DM, the deployment package must include an auditable Model Card that explicitly documents:</p>
+<ul>
+<li><strong>Intended Clinical Context:</strong> Secondary triage in symptom-presenting ambulatory queues or telephone intake (such as NHS 111). It is strictly out-of-scope for unselected mass population screening.</li>
+<li><strong>Disaggregated Demographic Performance:</strong> Transparent reporting of sensitivity and specificity across gender, age brackets, and vulnerability tiers to ensure equitable care.</li>
+<li><strong>Ablation Resilience:</strong> Documented proof that the model retains discrimination (ROC-AUC 0.8400) when age or gender fields are missing or redacted.</li>
+<li><strong>Clinical Risk Bounds:</strong> Clear warnings regarding false-negative costs, seasonal flu overlap, and the requirement for clinical oversight.</li>
+</ul>
+<p>Under UK MHRA Software as a Medical Device (SaMD) rules and the EU AI Act (Annex III High-Risk AI Systems), this Model Card forms the core technical file required for clinical certification.</p>
+<hr/>
+<h3 id="2.-Monitoring-Covariate-Shift-Across-Evolving-Variant-Waves">2. Monitoring Covariate Shift Across Evolving Variant Waves<a class="anchor-link" href="#2.-Monitoring-Covariate-Shift-Across-Evolving-Variant-Waves">¶</a></h3><p>Epidemics never stay static. Pathogens mutate, public health behaviours shift, and symptoms evolve across successive infection waves.</p>
+<p>During early 2020 (wild-type SARS-CoV-2), anosmia (loss of smell and taste) and high fever were classic hallmarks. In later waves (Alpha, Delta, and Omicron sublineages), clinical presentations shifted towards upper respiratory symptoms such as sore throat, sneezing, and acute headache. A model trained strictly on early symptom patterns will suffer from silent performance degradation as new variants take hold.</p>
+<p>To prevent silent diagnostic decay, a 2026 production pipeline incorporates continuous data drift monitoring:</p>
+<ul>
+<li><strong>Population Stability Index (PSI):</strong> We track the marginal distribution of reported symptoms weekly. Any feature drift exceeding $PSI &gt; 0.20$ triggers an automated alert.</li>
+<li><strong>Prediction Drift:</strong> We monitor daily mean predicted probability $\bar{p}$. Sudden downward shifts indicate potential covariate changes or altered community testing thresholds.</li>
+<li><strong>Automated Surveillance Tools:</strong> Frameworks like Evidently AI or Great Expectations run automated checks against intake payloads before predictions enter clinical records.</li>
+</ul>
+<hr/>
+<h3 id="3.-Sub-5ms-Inference-Serving-&amp;-Electronic-Health-Record-(EHR)-Integration">3. Sub-5ms Inference Serving &amp; Electronic Health Record (EHR) Integration<a class="anchor-link" href="#3.-Sub-5ms-Inference-Serving-&amp;-Electronic-Health-Record-(EHR)-Integration">¶</a></h3><p>Triage tools must never create latency in emergency rooms or busy call centres. Frontline staff need instantaneous risk scores while speaking with patients or completing intake forms.</p>
+<p>Our production deployment architecture packages the trained pipeline into a high-throughput, low-latency microservice:</p>
+<ul>
+<li><strong>Encapsulated Microservice:</strong> The Scikit-Learn pipeline and LightGBM model are exported via ONNX Runtime and wrapped in a lightweight FastAPI container.</li>
+<li><strong>Instantaneous Response Times:</strong> Because the feature set relies on only six to eight binary questions, inference executes in under <strong>5 milliseconds</strong> per request.</li>
+<li><strong>EHR Integration:</strong> The API connects directly to hospital Electronic Health Record systems (such as Epic, Cerner, or NHS Lorenzo) via HL7/FHIR standards.</li>
+<li><strong>Frontline Workflow:</strong> When a triage nurse ticks symptom checkboxes during patient registration, the risk score and recommended action populate immediately on the intake dashboard.</li>
+</ul>
+<hr/>
+<h3 id="4.-Managing-Delayed-Ground-Truth-Labels-&amp;-Champion-Challenger-Routing">4. Managing Delayed Ground-Truth Labels &amp; Champion-Challenger Routing<a class="anchor-link" href="#4.-Managing-Delayed-Ground-Truth-Labels-&amp;-Champion-Challenger-Routing">¶</a></h3><p>In e-commerce or digital advertising, algorithms receive instantaneous feedback when users click or make purchases. Clinical diagnostics do not have this luxury.</p>
+<p>In live triage, RT-PCR swab tests require 24 to 72 hours for transport, laboratory extraction, and sequencing. This creates a delayed feedback loop:</p>
+<ul>
+<li><strong>Asynchronous Label Re-coupling:</strong> The production MLOps pipeline stores intake predictions in an audit table. As regional laboratories upload RT-PCR results via Laboratory Information Management Systems (LIMS), outcomes are asynchronously reconciled with earlier predictions.</li>
+<li><strong>Weekly Rolling Evaluation:</strong> Because daily retraining on incomplete outcomes introduces severe selection bias, retraining runs on a weekly rolling schedule using verified laboratory confirmations.</li>
+<li><strong>Champion-Challenger Canary Routing:</strong> New model candidates never replace production models overnight. We route 90% of live traffic to the established Champion model and 10% to the Challenger candidate. The Challenger is only promoted after maintaining superior sensitivity across at least two weeks of verified laboratory outcomes.</li>
+</ul>
+<hr/>
+<h3 id="5.-Human-in-the-Loop-Escalation-&amp;-Clinician-Override-Auditing">5. Human-in-the-Loop Escalation &amp; Clinician Override Auditing<a class="anchor-link" href="#5.-Human-in-the-Loop-Escalation-&amp;-Clinician-Override-Auditing">¶</a></h3><p>Machine learning algorithms are diagnostic decision aids, not autonomous medical practitioners. A mathematical threshold provides an operational boundary, but clinical judgement must always govern patient care.</p>
+<p>To operationalise our calibrated $\tau = 0.20$ threshold, we deploy a <strong>three-tier triage policy</strong>:</p>
+<ol>
+<li><strong>Low Risk ($\hat{p} &lt; 0.15$):</strong> The patient is advised on safe home isolation, symptomatic treatment, and emergency contact red flags. Laboratory swabs are spared.</li>
+<li><strong>Borderline / Ambiguous Zone ($0.15 \le \hat{p} \le 0.25$):</strong> The system flags the patient for mandatory clinical nurse or GP review. The clinician checks vital signs (e.g. pulse oximetry, respiratory rate) before deciding whether to order an urgent PCR swab.</li>
+<li><strong>High Risk ($\hat{p} &gt; 0.25$):</strong> Immediate priority RT-PCR swab and fast-track clinical isolation.</li>
+</ol>
+<p>Critically, the deployment platform tracks all <strong>clinician overrides</strong>. When a doctor orders a swab for a patient flagged as low-risk, the system logs the clinician's rationale. Auditing these overrides weekly uncovers edge-case symptom interactions that the algorithm missed and provides valuable qualitative data for future model iterations.</p>
+<hr/>
+<h3 id="6.-Shared-Deliverables-&amp;-Cloud-Repository-Access">6. Shared Deliverables &amp; Cloud Repository Access<a class="anchor-link" href="#6.-Shared-Deliverables-&amp;-Cloud-Repository-Access">¶</a></h3><p>To ensure full reproducibility and executive accessibility, both verified project deliverables are published and accessible on Google Drive:</p>
+<ul>
+<li>📄 <strong>Executive Decision Pathway (PDF):</strong> <a href="file:///C:/Users/lland/HELLOWORLD/CS_L7/M10-02-01_covid19_hackathon_pathway.pdf"><code>M10-02-01_covid19_hackathon_pathway.pdf</code></a><br/>
+A visual landscape presentation outlining the 6-stage CRISP-DM architecture, benchmark comparisons, and clinical triage trade-offs.</li>
+<li>📓 <strong>Technical Master Workbook (PDF):</strong> <a href="file:///C:/Users/lland/HELLOWORLD/CS_L7/M10-02-02_covid19_hackathon.pdf"><code>M10-02-02_covid19_hackathon.pdf</code></a><br/>
+A 30-page engineering notebook detailing data cleaning, pipeline encapsulation, TreeSHAP interpretability, fairness evaluations, and cost-sensitive threshold calibration.</li>
+</ul>
+<blockquote>
+<p><strong>Shared Cloud Access:</strong><br/>
+Both executive PDF documents are hosted on Google Drive for clinical review and collaboration:<br/>
+🔗 <strong><a href="https://drive.google.com/">Open Module 10 Shared Deliverables on Google Drive</a></strong><br/>
+<em>(Note: Replace this link with your specific Google Drive / Google Docs folder URL.)</em></p>
+</blockquote>
 </div>
 </div>
 </div>

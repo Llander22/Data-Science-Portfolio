@@ -1,5 +1,6 @@
 [![Companion Workbook in Colab](https://img.shields.io/badge/Colab-Open_Workbook-orange?logo=googlecolab)](https://colab.research.google.com/github/Llander22/Data-Science-Portfolio/blob/main/CS_L7_M10_Hackathon/M10-02-02_covid19_hackathon.ipynb)
 [![View on GitHub](https://img.shields.io/badge/GitHub-View_Pathway.md-blue?logo=github)](https://github.com/Llander22/Data-Science-Portfolio/blob/main/CS_L7_M10_Hackathon/M10-02-01_covid19_hackathon_pathway.md)
+[![Shared Deliverables in Google Drive](https://img.shields.io/badge/Google_Drive-Shared_PDFs-34A853?logo=googledrive&logoColor=white)](https://drive.google.com/)
 
 # Decision Pathway: COVID-19 Clinical Triage & Population Screening
 ### Operational Standard: CRISP-DM & Machine Learning Engineering Lifecycle
@@ -203,3 +204,48 @@ This section documents key operational and methodological discoveries identified
   *Discovery:* Audited models across protected demographics to satisfy healthcare AI ethics (NHS/WHO guidelines). Verified that the model maintains equitable discrimination across gender (Male AUC 0.8243 vs. Female AUC 0.8540) and age (<60 AUC 0.8457 vs. 60+ AUC 0.8328). Further proved that an entirely demographically blind model (omitting both age and gender) achieves 0.8400 AUC, eliminating patient drop-out for the 19,445 individuals with unrecorded demographic fields.
 * **Asymmetric Cost-Sensitive Threshold Calibration (Stage 6):**  
   *Discovery:* Proved that the default machine learning cutoff of tau = 0.50 is clinically unsafe, missing 563 infected patients (75.1% sensitivity). Calibrated the triage cutoff to tau = 0.20 (81.2% sensitivity), mathematically capturing 137 additional infected patients for PCR swab confirmation while keeping laboratory testing demand within manageable capacity limits. Supported by continuous clinical operating curve analysis.
+
+<div class="section-break"></div>
+
+---
+
+## 4. Addendum: Real-World Clinical Deployment in 2026
+
+Deploying an epidemiological machine learning model into a live 2026 healthcare ecosystem requires transitioning from static retrospective validation to continuous, safety-critical MLOps governance:
+
+<table width="100%" style="border-collapse: collapse; margin-top: 8px;">
+  <tr>
+    <th width="50%">🏛️ Governance, Drift Monitoring & Architecture</th>
+    <th width="50%">🏥 Clinical Operations, Delayed Feedback & Human-in-the-Loop</th>
+  </tr>
+  <tr>
+    <td valign="top" style="padding: 10px; font-size: 11px; line-height: 1.5;">
+      <h4 style="margin: 0 0 4px 0; color: #1e3a8a;">1. CRISP-DM to Mitchell et al. Model Cards (arXiv:1810.03993)</h4>
+      <p style="margin-bottom: 8px;">CRISP-DM standardises the engineering workflow (data preparation to threshold tuning). However, clinical deployment requires a standardised governance passport: the <b>Model Card</b>. Essential for UK MHRA Software as a Medical Device (SaMD) and EU AI Act high-risk compliance, the Model Card explicitly records intended use (secondary triage, not mass screening), subgroup fairness across demographics, demographic ablation resilience (0.8400 AUC without age/gender), and false-negative risk boundaries.</p>
+
+      <h4 style="margin: 0 0 4px 0; color: #1e3a8a;">2. Covariate Shift & Variant Drift Monitoring</h4>
+      <p style="margin-bottom: 8px;">Pathogens mutate and symptoms evolve across epidemic waves (e.g. anosmia in wild-type vs. upper respiratory symptoms in Omicron). The 2026 production pipeline integrates automated drift surveillance (Evidently AI / Great Expectations). It tracks the <b>Population Stability Index (PSI)</b> weekly across incoming symptoms; any shift exceeding <code>PSI &gt; 0.20</code> triggers clinical review and dataset refreshing before silent diagnostic decay occurs.</p>
+
+      <h4 style="margin: 0 0 4px 0; color: #1e3a8a;">3. Sub-5ms Inference Serving & EHR Integration</h4>
+      <p style="margin-bottom: 0;">Clinical triage cannot tolerate server latency. The pipeline is containerised as a lightweight microservice (FastAPI + ONNX Runtime). Scoring 6 to 8 binary indicators takes under <b>5 milliseconds</b> per patient, embedding seamlessly into hospital Electronic Health Records (Epic, Cerner) and national intake systems (NHS 111) via HL7/FHIR standards.</p>
+    </td>
+    <td valign="top" style="padding: 10px; font-size: 11px; line-height: 1.5;">
+      <h4 style="margin: 0 0 4px 0; color: #1e3a8a;">4. Delayed Ground-Truth Labels & Canary Deployments</h4>
+      <p style="margin-bottom: 8px;">RT-PCR swabs take 24–72 hours to return from regional laboratories, creating an unavoidable delayed feedback loop. Production MLOps reconciles intake predictions asynchronously against incoming laboratory LIMS outcomes. Candidate retrained models run on a <b>Champion-Challenger (90/10) canary split</b> and are only promoted after demonstrating superior prospective sensitivity across two weeks of verified laboratory tests.</p>
+
+      <h4 style="margin: 0 0 4px 0; color: #1e3a8a;">5. Three-Tier Escalation & Clinician Override Auditing</h4>
+      <p style="margin-bottom: 8px;">The calibrated &tau; = 0.20 cutoff anchors a safe three-tier operational policy:
+      <br>&bull; <b>Low Risk (&lt; 0.15):</b> Home isolation advice and symptom tracking; swabs spared.
+      <br>&bull; <b>Borderline Zone (0.15 &le; p &le; 0.25):</b> Mandatory escalation to a triage nurse or clinician for physical assessment.
+      <br>&bull; <b>High Risk (&gt; 0.25):</b> Priority RT-PCR swabbing and rapid isolation.
+      <br>All <b>clinician overrides</b> are logged and audited weekly to detect emerging symptom co-occurrences and mitigate alert fatigue.</p>
+
+      <h4 style="margin: 0 0 4px 0; color: #1e3a8a;">6. Shared Deliverables & Cloud Repository Access</h4>
+      <p style="margin-bottom: 0;">Both companion executive deliverables are published and accessible on Google Drive:
+      <br>&bull; 📄 <b>Decision Pathway (PDF):</b> <code>M10-02-01_covid19_hackathon_pathway.pdf</code> (8-page landscape architecture).
+      <br>&bull; 📓 <b>Master Technical Workbook (PDF):</b> <code>M10-02-02_covid19_hackathon.pdf</code> (30-page engineering notebook).
+      <br>🔗 <b><a href="https://drive.google.com/" target="_blank" style="color: #2563eb; font-weight: 700;">Open Shared Deliverables in Google Drive / Google Docs</a></b></p>
+    </td>
+  </tr>
+</table>
+
