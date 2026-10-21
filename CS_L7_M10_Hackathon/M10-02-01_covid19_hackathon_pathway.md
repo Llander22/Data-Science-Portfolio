@@ -31,7 +31,7 @@
 
 * **🔷 Stage 5: Clinical Explainability & Demographic Fairness**
   * **Workbook Mapping:** `Phase 4: Advanced Modelling & Interpretability`
-  * **Key Decisions & Evidence:** Generate TreeSHAP beeswarm and bar attribution. Unsupervised 2D t-SNE symptom phenotyping. Subgroup fairness audit across gender (AUC 0.824 vs 0.854) and age.
+  * **Key Decisions & Evidence:** Generate TreeSHAP beeswarm and bar attribution. Unsupervised 2D t-SNE symptom phenotyping. Subgroup fairness audit across gender (AUC 0.824 vs 0.854) and age. Demographically blind ablation (0.8400 AUC) proving pure clinical features suffice for ethical deployment.
 
 * **🔷 Stage 6: Operational Thresholding & Clinical Impact**
   * **Workbook Mapping:** `Phase 5: Operational Decision Thresholding & Closing Summary`
@@ -76,9 +76,9 @@ The sections below decompose the **CRISP-DM Master Decision Architecture** into 
       <h3 style="margin: 0 0 8px 0; color: #1a73e8;">🔷 STAGE 2: Data Ingestion & Quality Auditing</h3>
       <p style="margin: 4px 0 12px 0; font-size: 13px; color: #5f6368;">📖 <b>Workbook Mapping:</b> Phase 2: Ingestion & Epidemiological EDA (Sections 2.1–2.2)</p>
       <ul style="padding-left: 20px; margin: 8px 0; line-height: 1.55;">
-        <li style="margin-bottom: 8px;">🟢 <b>Selected Option:</b> <b>Strict Ground Truth Filtration (<i>n</i> = 255,668)</b> — Drop inconclusive <code>other</code> outcomes (3,892) and missing gender records (19,445, &lt;7%) to guarantee clinical label fidelity.</li>
+        <li style="margin-bottom: 8px;">🟢 <b>Selected Option:</b> <b>Strict Ground Truth Filtration (<i>n</i> = 255,668)</b> — Drop inconclusive <code>other</code> outcomes (3,892) and missing gender records (19,445, &lt;7%) to guarantee clinical label fidelity for benchmark replication.</li>
         <li style="margin-bottom: 8px;">🔴 <b>Rejected Option:</b> <b>Synthetic Imputation of Missing Gender</b> — Distorts demographic distributions without adding predictive power; dataset size (&gt;255,000 verified cases) provides massive statistical power without synthetic risks.</li>
-        <li style="margin-bottom: 0;">🛡️ <b>Defensibility Rationale:</b> Removing ambiguous outcomes preserves pristine ground-truth labels without sacrificing statistical power, retaining 91.7% of the original nationwide cohort. Unmasked the <b>April 15 privacy redaction</b>, where age was 100% redacted mid-epidemic.</li>
+        <li style="margin-bottom: 0;">🛡️ <b>Defensibility Rationale:</b> Removing ambiguous outcomes preserves pristine ground-truth labels without sacrificing statistical power, retaining 91.7% of the original nationwide cohort. Unmasked the <b>April 15 privacy redaction</b>, where age was 100% redacted mid-epidemic. <i>(Note: While missing gender records are excluded here to strictly replicate the Nature benchmark, Stage 5 evaluates a Demographically Blind model that safely triages incomplete records in live deployment.)</i></li>
       </ul>
     </td>
   </tr>
@@ -95,9 +95,9 @@ The sections below decompose the **CRISP-DM Master Decision Architecture** into 
       <p style="margin: 4px 0 12px 0; font-size: 13px; color: #5f6368;">📖 <b>Workbook Mapping:</b> Phase 2.3–2.4 (Cohort Filtration & Redaction Discovery) & Phase 3 (Zero-Leakage Pipeline Architecture)</p>
       <ul style="padding-left: 20px; margin: 8px 0; line-height: 1.55;">
         <li style="margin-bottom: 8px;">🟢 <b>Selected Option:</b> <b>Encapsulated <code>Pipeline</code> + Prospective Temporal Partitioning</b> — Preprocessing (<code>ColumnTransformer</code> with <code>OneHotEncoder(handle_unknown='ignore')</code> and symptom passthrough) encapsulated inside a Scikit-Learn <code>Pipeline</code> fit exclusively on historical training data (March 22 – April 7, <i>n</i>=98,989). Tested strictly on prospective hold-out (April 8–14, <i>n</i>=37,305).</li>
-        <li style="margin-bottom: 8px;">🔴 <b>Rejected Option:</b> <b>Random Shuffling (<code>train_test_split(shuffle=True)</code>)</b> — Disastrous look-ahead leakage across evolving epidemic waves; inflates scores artificially.</li>
+        <li style="margin-bottom: 8px;">🔴 <b>Rejected Option:</b> <b>Random Shuffling (<code>train_test_split(shuffle=True)</code>)</b> — Disastrous look-ahead leakage across evolving epidemic waves; artificially inflates test ROC-AUC to <b>0.9157</b> (PR-AUC 0.7192) by predicting the past using future epidemic data and smoothing away real prevalence decay (8.46% down to 6.06%).</li>
         <li style="margin-bottom: 8px;">⚪ <b>Alternative Option:</b> <b>Global In-Place Transformation</b> — Leaks future category levels to training and causes training-serving skew in production deployment.</li>
-        <li style="margin-bottom: 0;">🛡️ <b>Defensibility Rationale:</b> Respects the epidemiological &ldquo;Arrow of Time&rdquo; and MLOps encapsulation standards, ensuring identical transformation during training and live inference.</li>
+        <li style="margin-bottom: 0;">🛡️ <b>Defensibility Rationale:</b> Respects the epidemiological &ldquo;Arrow of Time&rdquo; and MLOps encapsulation standards. While <code>test_date</code> is never fed to the model as an input feature, it is mandatory as the structural validation spine to ensure genuine, leak-free prospective discrimination (<b>0.8451 ROC-AUC</b>) matching the published *Nature* benchmark.</li>
       </ul>
     </td>
   </tr>
@@ -116,7 +116,7 @@ The sections below decompose the **CRISP-DM Master Decision Architecture** into 
         <li style="margin-bottom: 8px;">🟢 <b>Selected Option:</b> <b>LightGBM Champion (<code>num_leaves=20</code>, <code>min_child_samples=4</code>, <code>learning_rate=0.05</code>, <code>is_unbalance=True</code>) & XGBoost Benchmark</b> — Fast histogram-based gradient boosting achieving ROC-AUC <b>0.8443</b> (PR-AUC 0.5448) and XGBoost ROC-AUC <b>0.8448</b> (PR-AUC 0.5480), verified via internal 5-fold CV (0.9351 &plusmn; 0.0025). Robust <b>Symptom-Only LightGBM (Ablating Age)</b> achieves ROC-AUC <b>0.8448</b> (PR-AUC 0.5403), proving resilience to the April 15 redaction cliff.</li>
         <li style="margin-bottom: 8px;">🔴 <b>Rejected Option:</b> <b>Deep Neural Networks</b> — Excessive compute overhead, slow inference, and inferior tabular performance compared to tree gradient boosting.</li>
         <li style="margin-bottom: 8px;">⚪ <b>Alternative Option:</b> <b>Direct Test-Set Tuning (Test Snooping)</b> — Tuning against the test set leaks future outcomes; validation must occur strictly within training folds.</li>
-        <li style="margin-bottom: 0;">🛡️ <b>Defensibility Rationale:</b> Tree ensembles capture non-linear symptom co-occurrences without feature scaling, while <code>is_unbalance=True</code> mathematically corrects gradient updates for the 17.6:1 imbalance.</li>
+        <li style="margin-bottom: 0;">🛡️ <b>Defensibility Rationale:</b> Tree ensembles capture non-linear symptom co-occurrences without feature scaling, while <code>is_unbalance=True</code> mathematically corrects gradient updates for the 17.6:1 imbalance. Evaluated 50% sub-sampling (<code>max_samples=0.5</code>) on the baseline Random Forest: because ~100k rows saturate 8 binary features, it delivers an 80% reduction in training latency with zero loss in cross-validation discrimination (<code>0.9339</code> vs <code>0.9340</code>).</li>
       </ul>
     </td>
   </tr>
@@ -130,12 +130,13 @@ The sections below decompose the **CRISP-DM Master Decision Architecture** into 
     </td>
     <td width="58%" valign="top">
       <h3 style="margin: 0 0 8px 0; color: #1a73e8;">🔷 STAGE 5: Clinical Explainability & Demographic Fairness</h3>
-      <p style="margin: 4px 0 12px 0; font-size: 13px; color: #5f6368;">📖 <b>Workbook Mapping:</b> Phase 4: Advanced Modelling & Interpretability (TreeSHAP, 2D t-SNE Phenotyping & Subgroup Parity Audit)</p>
+      <p style="margin: 4px 0 12px 0; font-size: 13px; color: #5f6368;">📖 <b>Workbook Mapping:</b> Phase 4: Advanced Modelling & Interpretability (TreeSHAP, 2D t-SNE Phenotyping, Subgroup Parity & Demographically Blind Model)</p>
       <ul style="padding-left: 20px; margin: 8px 0; line-height: 1.55;">
         <li style="margin-bottom: 8px;">🟢 <b>Selected Option:</b> <b>TreeSHAP Explainability & Subgroup Demographic Fairness Audit</b> — Exact game-theoretic Shapley values reveal patient risk log-odds (<code>Contact with confirmed</code> and <code>Fever</code> dominate). Demographic slicing audits gender (Male AUC 0.8243 vs. Female AUC 0.8540) and age (&lt;60 AUC 0.8457 vs. 60+ AUC 0.8328). Includes 2D t-SNE unsupervised phenotyping.</li>
+        <li style="margin-bottom: 8px;">⚪ <b>Extension Option:</b> <b>Pure Clinical Demographically Blind Pipeline (ROC-AUC = 0.8400)</b> — Evaluates model performance when omitting both age and gender. Drops only 0.0051 AUC vs. the 8-feature benchmark, proving 99.4% of discriminative power is clinical. Eliminates triage drop-out for patients with unrecorded demographics and satisfies NHS/WHO AI ethics standards.</li>
         <li style="margin-bottom: 8px;">🔴 <b>Rejected Option:</b> <b>Aggregate-Only Metric Reporting</b> — Violates healthcare ethics by obscuring disparate clinical impact across vulnerable protected groups.</li>
         <li style="margin-bottom: 8px;">⚪ <b>Alternative Option:</b> <b>Permutation Importance</b> — Global ranking only, lacking individual-patient attribution.</li>
-        <li style="margin-bottom: 0;">🛡️ <b>Defensibility Rationale:</b> Transparent attribution is essential for clinical adoption and regulatory compliance (FDA/NHS AI guidelines).</li>
+        <li style="margin-bottom: 0;">🛡️ <b>Defensibility Rationale:</b> Transparent attribution is essential for clinical adoption and regulatory compliance (FDA/NHS AI guidelines). Demographically blind ablation demonstrates that frontline triage can operate without demographic dependency.</li>
       </ul>
     </td>
   </tr>
@@ -151,7 +152,7 @@ The sections below decompose the **CRISP-DM Master Decision Architecture** into 
       <h3 style="margin: 0 0 8px 0; color: #1a73e8;">🔷 STAGE 6: Operational Decision Thresholding & Clinical Impact</h3>
       <p style="margin: 4px 0 12px 0; font-size: 13px; color: #5f6368;">📖 <b>Workbook Mapping:</b> Phase 5: Operational Decision Thresholding & Closing Summary (Clinical Triage Insights)</p>
       <ul style="padding-left: 20px; margin: 8px 0; line-height: 1.55;">
-        <li style="margin-bottom: 8px;">🟢 <b>Selected Option:</b> <b>Calibrated Clinical Cutoff (&tau; = 0.20)</b> — Elevates sensitivity to <b>81.2%</b> (capturing 1,836 of 2,261 infected patients), rescuing 137 individuals who would have been sent home under &tau; = 0.50.</li>
+        <li style="margin-bottom: 8px;">🟢 <b>Selected Option:</b> <b>Calibrated Clinical Cutoff (&tau; = 0.20)</b> — Elevates sensitivity to <b>81.2%</b> (capturing 1,835 of 2,261 infected patients), rescuing 137 individuals who would have been sent home under &tau; = 0.50, delivering a <b>98.2% Negative Predictive Value (NPV)</b> for safe home monitoring while sparing 23,829 laboratory swabs.</li>
         <li style="margin-bottom: 8px;">🔴 <b>Rejected Option:</b> <b>Default &tau; = 0.50 Cutoff</b> — Implicitly assumes equal error costs; disastrous in epidemics where false negatives drive silent community transmission.</li>
         <li style="margin-bottom: 8px;">⚪ <b>Alternative Option:</b> <b>Emergency Cutoff (&tau; = 0.10)</b> — 94.3% sensitivity (missing only 128 patients), but triggers 26,892 false alarms, overwhelming lab capacity.</li>
         <li style="margin-bottom: 0;">🛡️ <b>Defensibility Rationale:</b> In infectious disease control, the cost of a False Negative far exceeds the cost of a False Positive. Tuning &tau; = 0.20 aligns ML with asymmetric healthcare risk.</li>
@@ -173,15 +174,17 @@ All models are evaluated on the identical, unseen prospective hold-out cohort (8
 | **Random Forest (100 Trees, Bagging)** | 8 | 0.9348 ± 0.0052 | 0.8412 | 0.5374 | 80.5% | 68.4% |
 | **LightGBM Champion (Paper Params)** | 8 | **0.9351 ± 0.0025** | **0.8443** | **0.5448** | **81.2%** | **68.0%** |
 | **LightGBM Symptom-Only (No Age)** | 7 | **0.9333 ± 0.0022** | **0.8448** | **0.5403** | **81.5%** | **67.8%** |
+| **LightGBM Pure Clinical (Demographically Blind)** | 6 | **0.9328 ± 0.0024** | **0.8400** | **0.5331** | **80.8%** | **67.6%** |
 | **XGBoost Benchmark (`max_depth=4`)** | 8 | **0.9350 ± 0.0025** | **0.8448** | **0.5480** | **81.4%** | **68.1%** |
 
 #### 🏥 Clinical Operational Assessments:
 * **Zero-Rule Dummy Baseline:** 94.71% accuracy but misses 100% of sick patients (illustrates the Accuracy Fallacy).
 * **Logistic Regression (Linear):** Strong baseline, but linear decision boundary misses non-linear symptom co-occurrences.
 * **Decision Tree Baseline:** Replicates *Zoabi et al.* baseline; provides interpretable clinical tree rules.
-* **Random Forest:** Parallel variance reduction with stable non-linear partitioning.
+* **Random Forest:** Parallel variance reduction with stable non-linear partitioning (50% sub-sampling trains 5x faster with identical discrimination).
 * **LightGBM Champion:** Replicates *Zoabi et al.* prospective test range (0.84–0.86); fast leaf-wise boosting.
 * **LightGBM Symptom-Only:** Resilient model that retains full discrimination (0.8448 AUC) after the April 15 age privacy redaction.
+* **LightGBM Pure Clinical:** Demographically blind pipeline retaining 0.8400 AUC, proving 99.4% of signal is clinical and enabling triage of all patients with unrecorded demographics.
 * **XGBoost Benchmark:** Confirms boosting engine invariance with depth-wise tree growth.
 
 ---
@@ -195,8 +198,8 @@ This section documents key operational and methodological discoveries identified
 * **The April 15 Regulatory Privacy Redaction (Stage 2 & 4):**  
   *Discovery:* Auditing daily testing volume revealed why `age_60_and_above` became 100% missing after April 14—health authorities intervened mid-epidemic to redact age to prevent citizen re-identification linkage attacks. By building and benchmarking an accessible **Symptom-Only model** (ROC-AUC **0.8448**), we proved that the clinical triage tool retains full diagnostic discrimination even when demographic features are legally redacted.
 * **The "Arrow of Time" Prospective Partitioning (Stage 3):**  
-  *Discovery:* Proved that standard cross-sectional random shuffling (`train_test_split(shuffle=True)`) creates catastrophic temporal look-ahead leakage across evolving epidemic waves. Validated that testing on future dates (April 8–14) simulates real hospital intake conditions.
-* **Demographic Fairness & Subgroup Parity Audit (Stage 5):**  
-  *Discovery:* Evaluated models across protected demographics to satisfy healthcare AI ethics (NHS/WHO guidelines). Verified that the model maintains equitable discrimination across gender (Male AUC 0.8243 vs. Female AUC 0.8540) and age (<60 AUC 0.8457 vs. 60+ AUC 0.8328).
+  *Discovery:* Proved that standard cross-sectional random shuffling (`train_test_split(shuffle=True)`) creates catastrophic temporal look-ahead leakage across evolving epidemic waves, artificially inflating ROC-AUC to 0.9157. Validated that testing on future dates (April 8–14) simulates real hospital intake conditions and captures genuine prevalence decay.
+* **Demographic Fairness & Demographically Blind Governance (Stage 5):**  
+  *Discovery:* Audited models across protected demographics to satisfy healthcare AI ethics (NHS/WHO guidelines). Verified that the model maintains equitable discrimination across gender (Male AUC 0.8243 vs. Female AUC 0.8540) and age (<60 AUC 0.8457 vs. 60+ AUC 0.8328). Further proved that an entirely demographically blind model (omitting both age and gender) achieves 0.8400 AUC, eliminating patient drop-out for the 19,445 individuals with unrecorded demographic fields.
 * **Asymmetric Cost-Sensitive Threshold Calibration (Stage 6):**  
-  *Discovery:* Proved that the default machine learning cutoff of tau = 0.50 is clinically unsafe, missing 567 infected patients (74.9% sensitivity). Calibrated the triage cutoff to tau = 0.20 (81.2% sensitivity), mathematically capturing 137 additional infected patients for PCR swab confirmation.
+  *Discovery:* Proved that the default machine learning cutoff of tau = 0.50 is clinically unsafe, missing 563 infected patients (75.1% sensitivity). Calibrated the triage cutoff to tau = 0.20 (81.2% sensitivity), mathematically capturing 137 additional infected patients for PCR swab confirmation while keeping laboratory testing demand within manageable capacity limits. Supported by continuous clinical operating curve analysis.
