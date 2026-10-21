@@ -1,6 +1,6 @@
 [![Companion Workbook in Colab](https://img.shields.io/badge/Colab-Open_Workbook-orange?logo=googlecolab)](https://colab.research.google.com/github/Llander22/Data-Science-Portfolio/blob/main/CS_L7_M10_Hackathon/M10-02-02_covid19_hackathon.ipynb)
 [![View on GitHub](https://img.shields.io/badge/GitHub-View_Pathway.md-blue?logo=github)](https://github.com/Llander22/Data-Science-Portfolio/blob/main/CS_L7_M10_Hackathon/M10-02-01_covid19_hackathon_pathway.md)
-[![Shared Deliverables in Google Drive](https://img.shields.io/badge/Google_Drive-Shared_PDFs-34A853?logo=googledrive&logoColor=white)](https://drive.google.com/)
+[![Shared Deliverables in Google Drive](https://img.shields.io/badge/Google_Drive-Shared_PDFs-34A853?logo=googledrive&logoColor=white)](https://drive.google.com/drive/folders/1PzhHH9AoM4HMXEWWJRMZm3P4V0W21a1c?usp=drive_link)
 
 # Decision Pathway: COVID-19 Clinical Triage & Population Screening
 ### Operational Standard: CRISP-DM & Machine Learning Engineering Lifecycle
@@ -242,9 +242,9 @@ Deploying an epidemiological machine learning model into a live 2026 healthcare 
 
       <h4 style="margin: 0 0 4px 0; color: #1e3a8a;">6. Shared Deliverables & Cloud Repository Access</h4>
       <p style="margin-bottom: 0;">Both companion executive deliverables are published and accessible on Google Drive:
-      <br>&bull; 📄 <b>Decision Pathway (PDF):</b> <code>M10-02-01_covid19_hackathon_pathway.pdf</code> (8-page landscape architecture).
-      <br>&bull; 📓 <b>Master Technical Workbook (PDF):</b> <code>M10-02-02_covid19_hackathon.pdf</code> (30-page engineering notebook).
-      <br>🔗 <b><a href="https://drive.google.com/" target="_blank" style="color: #2563eb; font-weight: 700;">Open Shared Deliverables in Google Drive / Google Docs</a></b></p>
+      <br>&bull; 📄 <b>Decision Pathway (PDF):</b> <code>M10-02-01_covid19_hackathon_pathway.pdf</code> (9-page landscape architecture).
+      <br>&bull; 📓 <b>Master Technical Workbook (PDF):</b> <code>M10-02-02_covid19_hackathon.pdf</code> (33-page engineering notebook).
+      <br>🔗 <b><a href="https://drive.google.com/drive/folders/1PzhHH9AoM4HMXEWWJRMZm3P4V0W21a1c?usp=drive_link" target="_blank" style="color: #2563eb; font-weight: 700;">Open Shared Deliverables in Google Drive / Google Docs</a></b></p>
     </td>
   </tr>
 </table>
