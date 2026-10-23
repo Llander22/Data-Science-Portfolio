@@ -8533,14 +8533,20 @@ Name: proportion, dtype: str
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Cross-Validation-Findings">Cross-Validation Findings<a class="anchor-link" href="#Cross-Validation-Findings">¶</a></h3><p>Testing across 5 rotating practice folds of past data confirms the model scores are consistent and dependable:</p>
+<h3 id="Cross-Validation-Findings">Cross-Validation Findings<a class="anchor-link" href="#Cross-Validation-Findings">¶</a></h3><p>Testing across 5 rotating practice folds of past data confirms how reliably each model ranks patient risk:</p>
 <ul>
 <li><strong>Zero-Rule Dummy:</strong> CV AUC = <code>0.5000</code> (the baseline floor of a blind guess).</li>
-<li><strong>Logistic Regression:</strong> CV AUC = <code>0.9280 ± 0.0052</code>.</li>
-<li><strong>Decision Tree (depth=5):</strong> CV AUC = <code>0.9226 ± 0.0045</code>.</li>
-<li><strong>Random Forest:</strong> CV AUC = <code>0.9339 ± 0.0060</code>.</li>
-<li><strong>LightGBM (with Age):</strong> CV AUC = <strong><code>0.9351 ± 0.0025</code></strong> (emerges as the top-performing candidate).</li>
-<li><strong>LightGBM Symptom-Only (No Age):</strong> CV AUC = <code>0.9333 ± 0.0022</code> (loses less than 0.2%, proving symptoms and contact drive almost all predictive power).</li>
+<li><strong>Logistic Regression:</strong> CV AUC = <code>0.9280 ± 0.0030</code> (linear scoring checklist).</li>
+<li><strong>Decision Tree (depth=5):</strong> CV AUC = <code>0.9226 ± 0.0031</code> (transparent clinical flowchart).</li>
+<li><strong>Random Forest:</strong> CV AUC = <code>0.9347 ± 0.0025</code> (100 voting decision trees).</li>
+<li><strong>LightGBM (with Age):</strong> CV AUC = <strong><code>0.9351 ± 0.0025</code></strong> (top-performing candidate booster).</li>
+<li><strong>LightGBM Symptom-Only (No Age):</strong> CV AUC = <code>0.9333 ± 0.0022</code> (clinical symptoms alone).</li>
+</ul>
+<h4 id="Why-These-Numbers-Matter-for-Frontline-Triage">Why These Numbers Matter for Frontline Triage<a class="anchor-link" href="#Why-These-Numbers-Matter-for-Frontline-Triage">¶</a></h4><ul>
+<li><strong>Symptom Combinations Win:</strong> LightGBM achieves the highest discrimination (<code>0.9351</code>) because gradient boosting captures multi-symptom interactions (e.g. cough combined with fever and contact history), whereas linear models (<code>0.9280</code>) score each symptom in isolation.</li>
+<li><strong>Narrow Uncertainty Confirms Stability:</strong> The tiny variation across the 5 practice folds (<code>± 0.0025</code>) proves the model's triage ability is dependable and consistent across different patient groups, rather than an accident of a lucky sample.</li>
+<li><strong>Symptoms Carry the Diagnostic Signal:</strong> Dropping age costs less than 0.2% in sorting ability (<code>0.9351</code> vs <code>0.9333</code>), confirming that self-reported symptoms and known contact provide virtually all predictive power.</li>
+<li><strong>Why Cross-Validation Alone is Not Enough:</strong> While ~0.93 AUC proves the model learned past patterns effectively, past training data cannot prove whether performance survives shifting epidemic waves. In Section 3.2, we test these models against genuinely unseen future patients.</li>
 </ul>
 </div>
 </div>
