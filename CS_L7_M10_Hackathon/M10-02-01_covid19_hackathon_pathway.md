@@ -46,7 +46,7 @@
 
 ---
 
-## 1. Stage-Aligned Decision Architecture & Ledger (CRISP-DM / MLOps Lifecycle)
+## Stage-Aligned Decision Architecture & Ledger (CRISP-DM / MLOps Lifecycle)
 
 The sections below decompose the **CRISP-DM Master Decision Architecture** into its operational stages. Each stage pairs a visual flowchart on the left with its decision ledger on the right:
 
@@ -189,7 +189,7 @@ The sections below decompose the **CRISP-DM Master Decision Architecture** into 
   </tr>
 </table>
 
-## 2. Quantitative Summary & Benchmark Scorecard
+## Quantitative Summary & Benchmark Scorecard
 
 All models are evaluated on the identical, unseen prospective hold-out cohort (8–14 April 2020, n = 37,305; 2,261 positive cases, 6.06% prevalence, random seed = 5):
 
@@ -218,7 +218,7 @@ All models are evaluated on the identical, unseen prospective hold-out cohort (8
 
 ---
 
-## 3. Engineering Analysis: Key Methodological Discoveries
+## Engineering Analysis: Key Methodological Discoveries
 
 This section documents key operational and methodological discoveries identified across the clinical triage engineering pipeline:
 
@@ -238,7 +238,7 @@ This section documents key operational and methodological discoveries identified
 
 ---
 
-## 4. Addendum: Real-World Clinical Deployment in 2026
+## Addendum: Real-World Clinical Deployment in 2026
 
 Deploying an epidemiological machine learning model into a live 2026 healthcare ecosystem requires transitioning from static retrospective validation to continuous, safety-critical MLOps governance:
 
