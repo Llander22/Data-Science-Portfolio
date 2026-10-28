@@ -280,7 +280,7 @@ Deploying an epidemiological machine learning model into a live 2026 healthcare 
 
 Conceived and prototyped during an intensive 2-day hackathon, this project was subsequently refined through structured human-AI pair-programming cycles to audit demographic fairness, resolve operational edge cases, and address peer review challenges. <b>AI tools:</b> Gemini 3.8 Flash (High) in Google Antigravity as coding assistant; Claude Opus 5.5 (Anthropic, medium effort) as independent reviewer, cross-checking both deliverables against the source dataset. Both project deliverables are published and accessible on Google Drive:
 
-* 📄 **Decision Pathway (PDF):** `M10-02-01 covid19_hackathon_pathway.pdf` (13-page landscape architecture).
+* 📄 **Decision Pathway (PDF):** `M10-02-01 covid19_hackathon_pathway.pdf` (10-page landscape architecture).
 * 📓 **Master Technical Workbook (PDF):** `M10-02-02 covid19_hackathon.pdf` (36-page engineering notebook).
 * 🔗 [Open Shared Deliverables in Google Drive / Google Docs](https://drive.google.com/drive/folders/1PzhHH9AoM4HMXEWWJRMZm3P4V0W21a1c?usp=drive_link)
 
