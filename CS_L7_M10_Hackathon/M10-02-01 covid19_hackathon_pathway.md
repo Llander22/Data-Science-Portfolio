@@ -238,6 +238,15 @@ This section documents key operational and methodological discoveries identified
 
 ---
 
+## Study Limitations & Threats to Validity
+
+* **Retrospective design:** Models were trained only on data available before the test window.
+* **Choices made after seeing results:** The decision threshold, model selection and age bypass were set after viewing the 8–14 April results. Those figures may be optimistic.
+* **Most independent estimate:** The 15–30 April cohort was evaluated after all choices were fixed. It gives the most independent estimate.
+* **Symptom recording bias:** Symptom data may have been recorded more completely for confirmed cases. That would inflate performance for all models, including the published benchmark.
+
+---
+
 ## Addendum: Real-World Clinical Deployment in 2026
 
 Deploying an epidemiological machine learning model into a live 2026 healthcare ecosystem requires transitioning from static retrospective validation to continuous, safety-critical MLOps governance:
@@ -261,9 +270,17 @@ Deploying an epidemiological machine learning model into a live 2026 healthcare 
 <p style="margin: 0 0 8px 0;">RT-PCR swabs take 24–72 hours to return from regional laboratories, creating an unavoidable delayed feedback loop. Production MLOps reconciles intake predictions asynchronously against incoming laboratory LIMS outcomes. Candidate retrained models run on a <b>Champion-Challenger (90/10) canary split</b> and are only promoted after demonstrating superior prospective sensitivity across two weeks of verified laboratory tests.</p>
 <h4 style="margin: 0 0 4px 0;">🛡️ 5. Calibrated Triage Policy & Clinician Override Auditing</h4>
 <p style="margin: 0 0 8px 0;">The calibrated &tau; = 0.20 cutoff anchors a clear, transparent clinical triage policy:<br>&bull; <b>Home Monitoring (&lt; 0.20):</b> Self-care guidance, digital symptom check-ins; laboratory swabs safely spared.<br>&bull; <b>PCR Swab Referral (&ge; 0.20):</b> Priority RT-PCR swabbing and rapid isolation precautions.<br>&bull; <b>Clinician Override Governance:</b> Frontline clinicians retain full discretion to order swabs for patients scoring &lt;0.20 who exhibit severe clinical distress. All clinician overrides are logged and audited weekly to monitor evolving symptom patterns and avoid alert fatigue.</p>
-<h4 style="margin: 0 0 4px 0;">🤝 6. Working Approach & Shared Deliverables</h4>
-<p style="margin: 0;">Conceived and prototyped during an intensive 2-day hackathon, this project was subsequently refined through structured human-AI pair-programming cycles to audit demographic fairness, resolve operational edge cases, and address peer review challenges. <b>AI tools:</b> Gemini 3.8 Flash (High) in Google Antigravity as coding assistant; Claude Opus 5.5 (Anthropic, medium effort) as independent reviewer, cross-checking both deliverables against the source dataset. Both project deliverables are published and accessible on Google Drive:<br>&bull; 📄 <b>Decision Pathway (PDF):</b> <code>M10-02-01 covid19_hackathon_pathway.pdf</code> (11-page landscape architecture).<br>&bull; 📓 <b>Master Technical Workbook (PDF):</b> <code>M10-02-02 covid19_hackathon.pdf</code> (35-page engineering notebook).<br>🔗 <b><a href="https://drive.google.com/drive/folders/1PzhHH9AoM4HMXEWWJRMZm3P4V0W21a1c?usp=drive_link" target="_blank" style="font-weight: 700;">Open Shared Deliverables in Google Drive / Google Docs</a></b></p>
 </td>
 </tr>
 </table>
+
+---
+
+## Working Approach & Shared Deliverables
+
+Conceived and prototyped during an intensive 2-day hackathon, this project was subsequently refined through structured human-AI pair-programming cycles to audit demographic fairness, resolve operational edge cases, and address peer review challenges. <b>AI tools:</b> Gemini 3.8 Flash (High) in Google Antigravity as coding assistant; Claude Opus 5.5 (Anthropic, medium effort) as independent reviewer, cross-checking both deliverables against the source dataset. Both project deliverables are published and accessible on Google Drive:
+
+* 📄 **Decision Pathway (PDF):** `M10-02-01 covid19_hackathon_pathway.pdf` (13-page landscape architecture).
+* 📓 **Master Technical Workbook (PDF):** `M10-02-02 covid19_hackathon.pdf` (36-page engineering notebook).
+* 🔗 [Open Shared Deliverables in Google Drive / Google Docs](https://drive.google.com/drive/folders/1PzhHH9AoM4HMXEWWJRMZm3P4V0W21a1c?usp=drive_link)
 
