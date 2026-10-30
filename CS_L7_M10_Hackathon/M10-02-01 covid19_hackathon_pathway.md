@@ -16,33 +16,33 @@
 
 ### 📖 Narrative Workbook vs. Engineering Lifecycle Crosswalk
 
-* **🔷 Stage 1: Clinical Problem Formulation & Triage (CRISP-DM Phase 1: Business Understanding)**
-  * **Workbook Mapping:** `Phase 1: Clinical Problem Formulation & Operational Framing`
-  * **Key Decisions & Evidence:** Define binary diagnostic risk (y in {0, 1}) under acute March 2020 RT-PCR scarcity. Mandate non-invasive 30-second self-reporting. Enforce the chronological "Arrow of Time".
+<table width="100%" style="border-collapse: collapse; margin-top: 4px;">
+<tr>
+<td width="50%" valign="top" style="border: 1px solid #cbd5e1; padding: 6px 10px; background: #ffffff;">
+<p style="margin: 0 0 2px 0; font-size: 11px; font-weight: 700; color: #1e3a8a;">🔷 Stage 1: Clinical Problem Formulation (Phase 1: Business Understanding)</p>
+<p style="margin: 0 0 6px 0; font-size: 10px; color: #475569;">Binary triage risk under acute PCR scarcity; 30-second intake; chronological arrow of time.</p>
 
-* **🔷 Stage 2: Data Ingestion & Quality Auditing (CRISP-DM Phase 2: Data Understanding)**
-  * **Workbook Mapping:** `Phase 2: Ingestion & Epidemiological Realities`
-  * **Key Decisions & Evidence:** Audit 278,848 tests (51 days). Unmask 94.7% vs 5.3% class imbalance. Expose the "Accuracy Fallacy". Uncover the April 15 regulatory privacy redaction cliff.
+<p style="margin: 0 0 2px 0; font-size: 11px; font-weight: 700; color: #1e3a8a;">🔷 Stage 2: Data Ingestion & Quality Auditing (Phase 2: Data Understanding)</p>
+<p style="margin: 0 0 6px 0; font-size: 10px; color: #475569;">278,848 tests; 94.7% vs 5.3% imbalance; unmasked accuracy fallacy; April 15 privacy cliff.</p>
 
-* **🔷 Stage 3: Preprocessing & Pipeline Architecture (CRISP-DM Phase 3: Data Preparation)**
-  * **Workbook Mapping:** `Phase 2.3–2.4 & Phase 3: Pipeline Architecture`
-  * **Key Decisions & Evidence:** Filter 3,892 inconclusive targets and 19k missing gender records (clean cohort n = 255,668). Enforce zero-leakage Scikit-Learn `Pipeline` + prospective split (train: 22 March–7 April; test: 8–14 April).
+<p style="margin: 0 0 2px 0; font-size: 11px; font-weight: 700; color: #1e3a8a;">🔷 Stage 3: Preprocessing & Pipeline Architecture (Phase 3: Data Preparation)</p>
+<p style="margin: 0 0 2px 0; font-size: 10px; color: #475569;">Filtered inconclusive records (n = 255,668); zero-leakage Scikit-Learn Pipeline + prospective split.</p>
+</td>
+<td width="50%" valign="top" style="border: 1px solid #cbd5e1; padding: 6px 10px; background: #ffffff;">
+<p style="margin: 0 0 2px 0; font-size: 11px; font-weight: 700; color: #1e3a8a;">🔷 Stage 4: Modelling & Boosting Benchmarks (Phase 4: Modeling)</p>
+<p style="margin: 0 0 6px 0; font-size: 10px; color: #475569;">LightGBM Champion (0.8443 AUC / 0.5441 PR-AUC); XGBoost benchmark; 5-fold CV baseline.</p>
 
-* **🔷 Stage 4: Modelling & Boosting Benchmarks (CRISP-DM Phase 4: Modeling)**
-  * **Workbook Mapping:** `Phase 3: Benchmark Methodology & Phase 4: XGBoost`
-  * **Key Decisions & Evidence:** Implement *Zoabi et al.* algorithms on extended prospective test window (8–14 April): Decision Tree (0.8302), Random Forest (0.8451), LightGBM Champion (0.8443, PR-AUC 0.5441), and XGBoost (0.8449, PR-AUC 0.5496). Validate via 5-fold CV within historical training window.
+<p style="margin: 0 0 2px 0; font-size: 11px; font-weight: 700; color: #1e3a8a;">🔷 Stage 5: Explainability & Demographic Fairness (Phase 5: Evaluation)</p>
+<p style="margin: 0 0 6px 0; font-size: 10px; color: #475569;">TreeSHAP feature ranking; geriatric sensitivity deficit audit; demographically blind ablation (0.8400 AUC).</p>
 
-* **🔷 Stage 5: Clinical Explainability & Demographic Fairness (CRISP-DM Phase 5: Evaluation)**
-  * **Workbook Mapping:** `Phase 4: Advanced Modelling & Interpretability`
-  * **Key Decisions & Evidence:** Generate TreeSHAP beeswarm and bar attribution. Unsupervised 2D t-SNE symptom phenotyping. Subgroup fairness audit across gender (AUC 0.824 vs 0.854) and age. Demographically blind ablation (0.8400 AUC) proving pure clinical features suffice for ethical deployment.
+<p style="margin: 0 0 2px 0; font-size: 11px; font-weight: 700; color: #1e3a8a;">🔷 Stage 6: Operational Thresholding & Deployment (Phase 6: Deployment)</p>
+<p style="margin: 0 0 6px 0; font-size: 10px; color: #475569;">Cutoff $\tau = 0.20$ (81.2% sensitivity; 23,829 swabs spared); 1-line frontline screening heuristic.</p>
 
-* **🔷 Stage 6: Operational Thresholding & Clinical Deployment (CRISP-DM Phase 6: Deployment)**
-  * **Workbook Mapping:** `Phase 5: Operational Decision Thresholding & Closing Summary`
-  * **Key Decisions & Evidence:** Deploy the demographically blind Pure Clinical Model at operational cutoff $\tau = 0.20$ (81.2% sensitivity, rescuing 221 infected patients who would be missed under default $\tau = 0.50$, delivering 98.2% NPV). Spares 23,829 swabs on uninfected patients (24,255 total sent home). Uncovers that $\tau = 0.20$ distills into a transparent 1-line frontline heuristic: swab if any symptom is reported or indication is Contact/Abroad.
-
-* **🔄 CRISP-DM Iteration 2: Post-Hackathon Synthesis, Calibration & Feedback Loop**
-  * **Workbook Mapping:** `Section 6: Further Improvement following the Hackathon Presentations`
-  * **Key Decisions & Evidence:** Probability calibration audit on deployed Pure Clinical Model (Logistic Regression Brier score 0.0401 vs LightGBM 0.1271, against 0.0569 base rate). Balanced accuracy (74.58%) and discrete operating cutoffs at $\tau = 0.40$ (77.2% sensitivity / 77.2% specificity, swabbing 26.1%) and $\tau = 0.50$ (71.4% sensitivity / 84.5% specificity, swabbing 18.9%). Clinical feature pruning proving that stripping secondary symptoms down to 3 Minimal Clinical features (cough, fever, indication) yields AUC 0.8248 (delta 0.0152 vs 0.8400), retaining 95.5% of discrimination above chance for an ultra-rapid intake. Proving that Bayesian PPV scales with prevalence waves (10% surge $\to$ about 22% PPV vs 1% lull $\to$ about 2.5% PPV), while threshold shifts within 0.12–0.36 alter zero decisions due to the empty score gap.
+<p style="margin: 0 0 2px 0; font-size: 11px; font-weight: 700; color: #1e3a8a;">🔄 CRISP-DM Iteration 2: Post-Hackathon Feedback Loop</p>
+<p style="margin: 0 0 2px 0; font-size: 10px; color: #475569;">Brier calibration; minimal 3-feature intake (0.8248 AUC); 210-fit grid search & decision invariance.</p>
+</td>
+</tr>
+</table>
 
 ---
 
@@ -61,7 +61,7 @@ The sections below decompose the **CRISP-DM Master Decision Architecture** into 
       <img src="https://raw.githubusercontent.com/Llander22/Data-Science-Portfolio/main/CS_L7_M10_Hackathon/images/pathway_stage_1_flowchart.png" width="100%" alt="Stage 1 Flowchart" style="border: 1px solid #dadce0; border-radius: 6px; padding: 6px; background: #ffffff;">
     </td>
     <td width="58%" valign="top">
-      <h3 style="margin: 0 0 8px 0; color: #1a73e8;">🔷 STAGE 1: Clinical Problem Formulation & Triage Mandate</h3>
+      <h3 style="margin: 0 0 4px 0; color: #1a73e8;">🔷 STAGE 1: Clinical Problem Formulation & Triage Mandate</h3>
       <p style="margin: 4px 0 12px 0; font-size: 13px; color: #5f6368;">📖 <b>Workbook Mapping:</b> Phase 1: Clinical Problem Formulation & Operational Framing (CRISP-DM Phase 1: Business Understanding)</p>
       <ul style="padding-left: 20px; margin: 8px 0; line-height: 1.55;">
         <li style="margin-bottom: 8px;">🟢 <b>Selected Option:</b> <b>Calibrated Binary Probability Classifier</b> — Estimating continuous infection risk <i>P(y=1|X) &isin; [0, 1]</i> from 8 self-reported indicators accessible in under 30 seconds to prioritise RT-PCR laboratory swabs.</li>
@@ -80,7 +80,7 @@ The sections below decompose the **CRISP-DM Master Decision Architecture** into 
       <img src="https://raw.githubusercontent.com/Llander22/Data-Science-Portfolio/main/CS_L7_M10_Hackathon/images/pathway_stage_2_flowchart.png" width="100%" alt="Stage 2 Flowchart" style="border: 1px solid #dadce0; border-radius: 6px; padding: 6px; background: #ffffff;">
     </td>
     <td width="58%" valign="top">
-      <h3 style="margin: 0 0 8px 0; color: #1a73e8;">🔷 STAGE 2: Data Ingestion & Quality Auditing</h3>
+      <h3 style="margin: 0 0 4px 0; color: #1a73e8;">🔷 STAGE 2: Data Ingestion & Quality Auditing</h3>
       <p style="margin: 4px 0 12px 0; font-size: 13px; color: #5f6368;">📖 <b>Workbook Mapping:</b> Phase 2: Ingestion & Epidemiological EDA (CRISP-DM Phase 2: Data Understanding)</p>
       <ul style="padding-left: 20px; margin: 8px 0; line-height: 1.55;">
         <li style="margin-bottom: 8px;">🟢 <b>Selected Option:</b> <b>Strict Ground Truth Filtration (<i>n</i> = 255,668)</b> — Drop inconclusive <code>other</code> outcomes (3,892) and missing gender records (19,045 among positive/negative cases, &lt;7%) to guarantee clinical label fidelity for benchmark comparison. Acknowledges that 53.3% of the clean cohort (n = 136,294, 17/22 March–14 April) forms the core modelling window.</li>
@@ -98,7 +98,7 @@ The sections below decompose the **CRISP-DM Master Decision Architecture** into 
       <img src="https://raw.githubusercontent.com/Llander22/Data-Science-Portfolio/main/CS_L7_M10_Hackathon/images/pathway_stage_3_flowchart.png" width="100%" alt="Stage 3 Flowchart" style="border: 1px solid #dadce0; border-radius: 6px; padding: 6px; background: #ffffff;">
     </td>
     <td width="58%" valign="top">
-      <h3 style="margin: 0 0 8px 0; color: #1a73e8;">🔷 STAGE 3: Preprocessing & Pipeline Architecture</h3>
+      <h3 style="margin: 0 0 4px 0; color: #1a73e8;">🔷 STAGE 3: Preprocessing & Pipeline Architecture</h3>
       <p style="margin: 4px 0 12px 0; font-size: 13px; color: #5f6368;">📖 <b>Workbook Mapping:</b> Phase 2.3–2.4 & Phase 3: Zero-Leakage Pipeline (CRISP-DM Phase 3: Data Preparation)</p>
       <ul style="padding-left: 20px; margin: 8px 0; line-height: 1.55;">
         <li style="margin-bottom: 8px;">🟢 <b>Selected Option:</b> <b>Encapsulated <code>Pipeline</code> + Prospective Temporal Partitioning</b> — The demographic ablations and the deployed Pure Clinical model wrap a <code>ColumnTransformer</code> (<code>OneHotEncoder(handle_unknown='ignore')</code> + symptom passthrough) inside a Scikit-Learn <code>Pipeline</code> fit exclusively on historical training data (March 22 – April 7, <i>n</i>=98,989); the Phase 3 benchmarks use fixed binary indicators, which have no fitted vocabulary to leak. Tested strictly on prospective hold-out (April 8–14, <i>n</i>=37,305).</li>
@@ -117,7 +117,7 @@ The sections below decompose the **CRISP-DM Master Decision Architecture** into 
       <img src="https://raw.githubusercontent.com/Llander22/Data-Science-Portfolio/main/CS_L7_M10_Hackathon/images/pathway_stage_4_flowchart.png" width="100%" alt="Stage 4 Flowchart" style="border: 1px solid #dadce0; border-radius: 6px; padding: 6px; background: #ffffff;">
     </td>
     <td width="58%" valign="top">
-      <h3 style="margin: 0 0 8px 0; color: #1a73e8;">🔷 STAGE 4: Model Architecture & Boosting Benchmarks</h3>
+      <h3 style="margin: 0 0 4px 0; color: #1a73e8;">🔷 STAGE 4: Model Architecture & Boosting Benchmarks</h3>
       <p style="margin: 4px 0 12px 0; font-size: 13px; color: #5f6368;">📖 <b>Workbook Mapping:</b> Phase 3: Model Architecture Benchmarks & Phase 4: XGBoost (CRISP-DM Phase 4: Modeling)</p>
       <ul style="padding-left: 20px; margin: 8px 0; line-height: 1.55;">
         <li style="margin-bottom: 8px;">🟢 <b>Selected Option:</b> <b>LightGBM Champion (<code>num_leaves=20</code>, <code>min_child_samples=4</code>, <code>learning_rate=0.05</code>, <code>is_unbalance=True</code>) & XGBoost Benchmark</b> — Fast histogram-based gradient boosting achieving ROC-AUC <b>0.8443</b> (PR-AUC 0.5441) and XGBoost ROC-AUC <b>0.8449</b> (PR-AUC 0.5496), verified via internal 5-fold CV (0.9351 &plusmn; 0.0025). Crucially, at tau = 0.20, Random Forest, XGBoost and both LightGBMs reach exactly the same operating point (81.2% sensitivity / 68.0% specificity), with the single Decision Tree close behind (80.4% / 68.0%); for the deployed Pure Clinical model this operating point is verified patient-by-patient to be the 1-line rule. LightGBM is retained for pipeline continuity, while Logistic Regression demonstrates comparable discrimination (0.8336 AUC) with superior probability calibration (Brier 0.0401). Robust <b>Symptom-Only LightGBM (Ablating Age)</b> achieves ROC-AUC <b>0.8448</b> (PR-AUC 0.5401).</li>
@@ -136,7 +136,7 @@ The sections below decompose the **CRISP-DM Master Decision Architecture** into 
       <img src="https://raw.githubusercontent.com/Llander22/Data-Science-Portfolio/main/CS_L7_M10_Hackathon/images/pathway_stage_5_flowchart.png" width="100%" alt="Stage 5 Flowchart" style="border: 1px solid #dadce0; border-radius: 6px; padding: 6px; background: #ffffff;">
     </td>
     <td width="58%" valign="top">
-      <h3 style="margin: 0 0 8px 0; color: #1a73e8;">🔷 STAGE 5: Clinical Explainability & Demographic Fairness</h3>
+      <h3 style="margin: 0 0 4px 0; color: #1a73e8;">🔷 STAGE 5: Clinical Explainability & Demographic Fairness</h3>
       <p style="margin: 4px 0 12px 0; font-size: 13px; color: #5f6368;">📖 <b>Workbook Mapping:</b> Phase 4: Advanced Modelling & Interpretability (CRISP-DM Phase 5: Evaluation)</p>
       <ul style="padding-left: 20px; margin: 8px 0; line-height: 1.55;">
         <li style="margin-bottom: 8px;">🟢 <b>Selected Option:</b> <b>TreeSHAP Explainability & Subgroup Demographic Fairness Audit</b> — Exact game-theoretic Shapley values reveal patient risk log-odds (<code>Contact with confirmed</code> and <code>Fever</code> dominate). Subgroup auditing on the deployed Pure Clinical model reveals subtle demographic variation: gender parity (Male AUC 0.8255 vs. Female AUC 0.8554; 80.2% vs 82.2% sensitivity), but exposes a critical 10.2 percentage point geriatric sensitivity deficit for older adults (&lt;60 AUC 0.8414 with 83.0% sensitivity vs. 60+ AUC 0.8251 with 72.8% sensitivity at tau = 0.20, missing over 1 in 4 infected seniors: 109 of 400; 27.2% of infected seniors reported zero symptoms and indication 'Other', falling below the rule cutoff). Evaluates an age-60+ bypass as mitigation: it catches all 109 missed seniors (overall sensitivity 86.0%) but adds 6,821 swabs (+52%, 1.6% yield), so adoption is a service-level policy decision.</li>
@@ -156,7 +156,7 @@ The sections below decompose the **CRISP-DM Master Decision Architecture** into 
       <img src="https://raw.githubusercontent.com/Llander22/Data-Science-Portfolio/main/CS_L7_M10_Hackathon/images/pathway_stage_6_flowchart.png" width="100%" alt="Stage 6 Flowchart" style="border: 1px solid #dadce0; border-radius: 6px; padding: 6px; background: #ffffff;">
     </td>
     <td width="58%" valign="top">
-      <h3 style="margin: 0 0 8px 0; color: #1a73e8;">🔷 STAGE 6: Operational Decision Thresholding & Clinical Deployment</h3>
+      <h3 style="margin: 0 0 4px 0; color: #1a73e8;">🔷 STAGE 6: Operational Decision Thresholding & Clinical Deployment</h3>
       <p style="margin: 4px 0 12px 0; font-size: 13px; color: #5f6368;">📖 <b>Workbook Mapping:</b> Phase 5: Operational Decision Thresholding & Closing Summary (CRISP-DM Phase 6: Deployment)</p>
       <ul style="padding-left: 20px; margin: 8px 0; line-height: 1.55;">
         <li style="margin-bottom: 8px;">🟢 <b>Selected Option:</b> <b>Operational Clinical Cutoff ($\tau$ = 0.20) & Rule Distillation</b> — Elevates sensitivity to <b>81.16%</b> (capturing 1,835 of 2,261 infected patients), rescuing <b>221</b> infected individuals who would be missed under default $\tau$ = 0.50 (missed cuts from 647 to 426), delivering a <b>98.24% Negative Predictive Value (NPV)</b>. Spares 23,829 laboratory swabs on uninfected patients (24,255 sent home total). Analysis of score distributions reveals that zero patients fall between 0.11 and 0.36; setting $\tau$ = 0.20 distills the tree model into an ultra-transparent 1-line rule: swab if any symptom is present or test indication is Contact/Abroad.</li>
@@ -177,7 +177,7 @@ The sections below decompose the **CRISP-DM Master Decision Architecture** into 
       <img src="https://raw.githubusercontent.com/Llander22/Data-Science-Portfolio/main/CS_L7_M10_Hackathon/images/pathway_iteration_2_flowchart.png" width="100%" alt="Iteration 2 Flowchart" style="border: 1px solid #dadce0; border-radius: 6px; padding: 6px; background: #ffffff;">
     </td>
     <td width="58%" valign="top">
-      <h3 style="margin: 0 0 8px 0; color: #1a73e8;">🔄 CRISP-DM ITERATION 2: Post-Hackathon Synthesis, Calibration & Prevalence Drift</h3>
+      <h3 style="margin: 0 0 4px 0; color: #1a73e8;">🔄 CRISP-DM ITERATION 2: Post-Hackathon Synthesis, Calibration & Prevalence Drift</h3>
       <p style="margin: 4px 0 12px 0; font-size: 13px; color: #5f6368;">📂 <b>Workbook Mapping:</b> Section 6: Further Improvement following the Hackathon Presentations (Continuous Feedback Loop)</p>
       <ul style="padding-left: 20px; margin: 8px 0; line-height: 1.55;">
         <li style="margin-bottom: 8px;">✅ <b>Selected Option:</b> <b>Dual Calibration & Conservative Operating Point Audit</b> — Evaluates probability calibration via Brier score on the deployed Pure Clinical Model. Pure clinical Logistic Regression achieves <b>0.0401</b> (Brier skill score +0.29 against the 0.0569 base-rate reference); LightGBM achieves <b>0.1271</b> (skill score −1.23, worse than the base rate) because positive-class weighting (<code>is_unbalance=True</code>) inflates every score without changing the patient ranking; sensitivity is set by the threshold, not the weighting. Evaluates conservative operating cutoffs: $\tau$ = 0.40 catches 77.22% of infections at 77.19% specificity (swabbing 26.1% of attendees); $\tau$ = 0.50 catches 71.38% of infections at 84.47% specificity (swabbing 18.9% of attendees). Models posterior PPV across waves (10% surge &rarr; ~22% PPV vs 1% lull &rarr; ~2.5% PPV) while proving that threshold shifts within the 0.12–0.36 score gap alter zero patient decisions.</li>
@@ -258,32 +258,32 @@ This section documents key operational and methodological discoveries identified
 
 Deploying an epidemiological machine learning model into a live 2026 healthcare ecosystem requires transitioning from static retrospective validation to continuous, safety-critical MLOps governance:
 
-<table width="100%" style="border-collapse: collapse; margin-top: 8px;">
+<table width="100%" style="border-collapse: collapse; margin-top: 4px;">
 <tr>
 <th width="50%" style="background: #1e3a8a; color: #ffffff; padding: 6px 10px; text-align: left; font-size: 12px;">🏛️ Governance, Drift Monitoring & Architecture</th>
 <th width="50%" style="background: #1e3a8a; color: #ffffff; padding: 6px 10px; text-align: left; font-size: 12px;">🏥 Clinical Operations, Delayed Feedback & Human-in-the-Loop</th>
 </tr>
 <tr>
-<td width="50%" valign="top" style="padding: 10px; border: 1px solid #cbd5e1; font-size: 11px; line-height: 1.5; vertical-align: top;">
+<td width="50%" valign="top" style="padding: 6px 8px; border: 1px solid #cbd5e1; font-size: 11px; line-height: 1.5; vertical-align: top;">
 <h4 style="margin: 0 0 4px 0;">📋 1. CRISP-DM to Mitchell et al. Model Cards (arXiv:1810.03993)</h4>
-<p style="margin: 0 0 8px 0;">CRISP-DM standardises the engineering workflow (data preparation to threshold tuning). However, clinical deployment requires a standardised governance passport: the <b>Model Card</b>. Essential for UK MHRA Software as a Medical Device (SaMD) and EU AI Act high-risk compliance, the Model Card explicitly records intended use (gatekeeper triage acknowledging ~69% asymptomatic baseline), the 10.2 percentage point geriatric sensitivity deficit (72.8% in 60+ vs 83.0% in <60) with the cost of its candidate age-bypass mitigation (+52% swabs, 1.6% yield), post-peak sensitivity drift (81.2% -> 71.6%), and demographic ablation resilience (0.8400 AUC without age/gender).</p>
+<p style="margin: 0 0 4px 0;">CRISP-DM standardises the engineering workflow (data preparation to threshold tuning). However, clinical deployment requires a standardised governance passport: the <b>Model Card</b>. Essential for UK MHRA Software as a Medical Device (SaMD) and EU AI Act high-risk compliance, the Model Card explicitly records intended use (gatekeeper triage acknowledging ~69% asymptomatic baseline), the 10.2 percentage point geriatric sensitivity deficit (72.8% in 60+ vs 83.0% in <60) with the cost of its candidate age-bypass mitigation (+52% swabs, 1.6% yield), post-peak sensitivity drift (81.2% -> 71.6%), and demographic ablation resilience (0.8400 AUC without age/gender).</p>
 <h4 style="margin: 0 0 4px 0;">📈 2. Covariate Shift & Variant Drift Monitoring</h4>
-<p style="margin: 0 0 8px 0;">Pathogens mutate and symptoms evolve across epidemic waves (e.g. anosmia in wild-type vs. upper respiratory symptoms in Omicron). The 2026 production pipeline integrates automated drift surveillance (Evidently AI / Great Expectations). It tracks the <b>Population Stability Index (PSI)</b> weekly across incoming symptoms; any shift exceeding <code>PSI &gt; 0.20</code> triggers clinical review and dataset refreshing before silent diagnostic decay occurs.</p>
+<p style="margin: 0 0 4px 0;">Pathogens mutate and symptoms evolve across epidemic waves (e.g. anosmia in wild-type vs. upper respiratory symptoms in Omicron). The 2026 production pipeline integrates automated drift surveillance (Evidently AI / Great Expectations). It tracks the <b>Population Stability Index (PSI)</b> weekly across incoming symptoms; any shift exceeding <code>PSI &gt; 0.20</code> triggers clinical review and dataset refreshing before silent diagnostic decay occurs.</p>
 <h4 style="margin: 0 0 4px 0;">⚡ 3. Sub-5ms Inference Serving & EHR Integration</h4>
 <p style="margin: 0;">Clinical triage cannot tolerate server latency. The pipeline is containerised as a lightweight microservice (FastAPI + ONNX Runtime). Scoring our 6 pure clinical features (or 3 core questions in a rapid intake) executes in under <b>5 milliseconds</b> per patient, requiring zero demographic queries and completely eliminating EHR runtime crashes caused by missing age or gender fields. Embeds seamlessly into hospital Electronic Health Records (Epic, Cerner) and national intake systems (NHS 111) via HL7/FHIR standards.</p>
 </td>
-<td width="50%" valign="top" style="padding: 10px; border: 1px solid #cbd5e1; font-size: 11px; line-height: 1.5; vertical-align: top;">
+<td width="50%" valign="top" style="padding: 6px 8px; border: 1px solid #cbd5e1; font-size: 11px; line-height: 1.5; vertical-align: top;">
 <h4 style="margin: 0 0 4px 0;">🧪 4. Delayed Ground-Truth Labels & Canary Deployments</h4>
-<p style="margin: 0 0 8px 0;">RT-PCR swabs take 24–72 hours to return from regional laboratories, creating an unavoidable delayed feedback loop. Production MLOps reconciles intake predictions asynchronously against incoming laboratory LIMS outcomes. Candidate retrained models run on a <b>Champion-Challenger (90/10) canary split</b> and are only promoted after demonstrating superior prospective sensitivity across two weeks of verified laboratory tests.</p>
+<p style="margin: 0 0 4px 0;">RT-PCR swabs take 24–72 hours to return from regional laboratories, creating an unavoidable delayed feedback loop. Production MLOps reconciles intake predictions asynchronously against incoming laboratory LIMS outcomes. Candidate retrained models run on a <b>Champion-Challenger (90/10) canary split</b> and are only promoted after demonstrating superior prospective sensitivity across two weeks of verified laboratory tests.</p>
 <h4 style="margin: 0 0 4px 0;">🛡️ 5. Calibrated Triage Policy & Clinician Override Auditing</h4>
-<p style="margin: 0 0 8px 0;">The calibrated $\tau$ = 0.20 cutoff anchors a clear, transparent clinical triage policy:<br>&bull; <b>Home Monitoring (&lt; 0.20):</b> Self-care guidance, digital symptom check-ins; laboratory swabs safely spared.<br>&bull; <b>PCR Swab Referral (&ge; 0.20):</b> Priority RT-PCR swabbing and rapid isolation precautions.<br>&bull; <b>Clinician Override Governance:</b> Frontline clinicians retain full discretion to order swabs for patients scoring &lt;0.20 who exhibit severe clinical distress. All clinician overrides are logged and audited weekly to monitor evolving symptom patterns and avoid alert fatigue.</p>
+<p style="margin: 0 0 4px 0;">The calibrated $\tau$ = 0.20 cutoff anchors a clear, transparent clinical triage policy:<br>&bull; <b>Home Monitoring (&lt; 0.20):</b> Self-care guidance, digital symptom check-ins; laboratory swabs safely spared.<br>&bull; <b>PCR Swab Referral (&ge; 0.20):</b> Priority RT-PCR swabbing and rapid isolation precautions.<br>&bull; <b>Clinician Override Governance:</b> Frontline clinicians retain full discretion to order swabs for patients scoring &lt;0.20 who exhibit severe clinical distress. All clinician overrides are logged and audited weekly to monitor evolving symptom patterns and avoid alert fatigue.</p>
 </td>
 </tr>
 </table>
 
 ---
 
-## Working Approach & Shared Deliverables
+### Working Approach & Shared Deliverables
 
 Conceived and prototyped during an intensive 2-day hackathon, this project was subsequently refined through structured human-AI pair-programming cycles to audit demographic fairness, resolve operational edge cases, and address peer review challenges. <b>AI tools:</b> Gemini 3.8 Flash (High) in Google Antigravity as coding assistant; Claude Opus 5.5 (Anthropic, medium effort) as independent reviewer, cross-checking both deliverables against the source dataset. Both project deliverables are published and accessible on Google Drive:
 
