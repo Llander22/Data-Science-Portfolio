@@ -1,6 +1,5 @@
 [![Companion Workbook in Colab](https://img.shields.io/badge/Colab-Open_Workbook-orange?logo=googlecolab)](https://colab.research.google.com/github/Llander22/Data-Science-Portfolio/blob/main/CS_L7_M10_Hackathon/M10-02-02%20covid19_hackathon.ipynb)
-[![View on GitHub](https://img.shields.io/badge/GitHub-View_Pathway.md-blue?logo=github)](https://github.com/Llander22/Data-Science-Portfolio/blob/main/CS_L7_M10_Hackathon/M10-02-01%20covid19_hackathon_pathway.md)
-[![Shared Deliverables in Google Drive](https://img.shields.io/badge/Google_Drive-Shared_PDFs-34A853?logo=googledrive&logoColor=white)](https://drive.google.com/drive/folders/1PzhHH9AoM4HMXEWWJRMZm3P4V0W21a1c?usp=drive_link)
+[![Workbook PDF in Google Drive](https://img.shields.io/badge/Google_Drive-Workbook_PDF-34A853?logo=googledrive&logoColor=white)](https://drive.google.com/file/d/1d3qpg47eca1DAK13S7Id_SMwCU_OfmSm/view?usp=drive_link)
 
 # Decision Pathway: COVID-19 Clinical Triage & Population Screening
 ### Operational Standard: CRISP-DM & Machine Learning Engineering Lifecycle
@@ -283,11 +282,10 @@ Deploying an epidemiological machine learning model into a live 2026 healthcare 
 
 ---
 
-### Working Approach & Shared Deliverables
+### Working Approach & Companion Deliverables
 
-Conceived and prototyped during an intensive 2-day hackathon, this project was subsequently refined through structured human-AI pair-programming cycles to audit demographic fairness, resolve operational edge cases, and address peer review challenges. <b>AI tools:</b> Gemini 3.8 Flash (High) in Google Antigravity as coding assistant; Claude Opus 5.5 (Anthropic, medium effort) as independent reviewer, cross-checking both deliverables against the source dataset. Both project deliverables are published and accessible on Google Drive:
+Conceived and prototyped during an intensive 2-day hackathon, this project was subsequently refined through structured human-AI pair-programming cycles to audit demographic fairness, resolve operational edge cases, and address peer review challenges. <b>AI tools:</b> Gemini 3.8 Flash (High) in Google Antigravity as coding assistant; Claude Opus 5.5 (Anthropic, medium effort) as independent reviewer, cross-checking both deliverables against the source dataset. Companion project deliverables:
 
-* 📄 **Decision Pathway (PDF):** `M10-02-01 covid19_hackathon_pathway.pdf` (11-page landscape architecture).
-* 📓 **Master Technical Workbook (PDF):** `M10-02-02 covid19_hackathon.pdf` (42-page engineering notebook).
-* 🔗 [Open Shared Deliverables in Google Drive / Google Docs](https://drive.google.com/drive/folders/1PzhHH9AoM4HMXEWWJRMZm3P4V0W21a1c?usp=drive_link)
+* 📓 **Interactive Technical Workbook (Colab):** [Open in Google Colab](https://colab.research.google.com/github/Llander22/Data-Science-Portfolio/blob/main/CS_L7_M10_Hackathon/M10-02-02%20covid19_hackathon.ipynb)
+* 📄 **Master Technical Workbook (PDF):** [View on Google Drive](https://drive.google.com/file/d/1d3qpg47eca1DAK13S7Id_SMwCU_OfmSm/view?usp=drive_link)
 
